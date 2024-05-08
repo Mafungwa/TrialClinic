@@ -46,6 +46,10 @@ namespace TrialClinic.Services
 
         public void SeedDatabase()
         {
+            if (_dbconnection.Table<User>().Count() ==0 ) 
+            {
+
+            }
 
         }
 
