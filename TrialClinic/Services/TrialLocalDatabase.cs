@@ -54,5 +54,29 @@ namespace TrialClinic.Services
 
         }
 
+        public void SaveChatMessage(PrivateChat chatMessage)
+        {
+            _dbconnection.Insert(chatMessage);
+        }
+
+        public List<PrivateChat> GetPrivateChat()
+        {
+            return _dbconnection.Table<PrivateChat>().ToList();
+        }
+
+        /*public List<User> GetAllUserProfile()
+        {
+            return _dbconnection.Table<User>().ToList();
+        }
+
+        public User GetUserProfileById(int id)
+        {
+            User userProfile = _dbconnection.Table<User>().Where(x =>x.UserId == id).FirstOrDefault();
+        }
+
+        public void UpdateUserProfile(User userProfile)
+        {
+            _dbconnection.Update(userProfile);
+        }*/
     }
 }

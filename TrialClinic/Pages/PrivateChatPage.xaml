@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrialClinic.Pages.PrivateChatPage"
+             Shell.FlyoutBehavior="Disabled"
+             Title="PrivateChatPage">
+    <VerticalStackLayout>
+        <ListView x:Name="ChatLisyView" ItemsSource ="{Binding SecreteChats}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label Text="{Binding Message}"/>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Entry x:Name="MessageEntry" Placeholder="Type a message"/>
+        <Button x:Name="SendButton" Text="Send" Clicked="OnSendButtonClicked"/>
+    </VerticalStackLayout>
+</ContentPage>

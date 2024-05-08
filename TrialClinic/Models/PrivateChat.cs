@@ -14,6 +14,8 @@ namespace TrialClinic.Models
 
         public int ChatId { get; set; }
 
+        public string Message { get; set; }
+
         [ForeignKey(nameof(UserType))]
 
         public string ParticipanCtId { get; set; }
