@@ -16,12 +16,6 @@ namespace TrialClinic.Models
 
         public string Message { get; set; }
 
-        [ForeignKey(nameof(UserType))]
-
-        public string ParticipanCtId { get; set; }
-
-        [ForeignKey(nameof(UserType))]
-
         public string RecruiterId { get; set; }
     }
 }

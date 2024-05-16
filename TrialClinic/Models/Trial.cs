@@ -18,11 +18,12 @@ namespace TrialClinic.Models
 
         public int TrialPhase { get; set; }
 
-        public int TrialDuration { get; set; }
+        public DateTime TrialStartDate { get; set; }
+        public DateTime TrialEndDate { get; set; }
 
         [ForeignKey(nameof(Location))]
 
-        public string Location { get; set; }
+        public int LocationId { get; set; }
 
         public string TrialDescription { get; set; }
     }

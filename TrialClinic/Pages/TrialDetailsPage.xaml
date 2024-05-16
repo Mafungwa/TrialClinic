@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrialClinic.Pages.TrialDetailsPage"
+             Title="Trial Details">
+    <ScrollView>
+        <StackLayout>
+            <!-- Trial details -->
+            <Label Text="Trial Name" />
+            <Label Text="{Binding Trial.TrialName}" />
+
+            <Label Text="Trial Phase" />
+            <Label Text="{Binding Trial.TrialPhase}" />
+
+            <Label Text="Trial Start Date" />
+            <Label Text="{Binding Trial.TrialStartDate}" />
+
+            <Label Text="Trial End Date" />
+            <Label Text="{Binding Trial.TrialEndDate}" />
+
+            <Label Text="Trial Description" />
+            <Label Text="{Binding Trial.TrialDescription}" />
+
+            <!-- Location details -->
+            <Label Text="Location" />
+            <Label Text="{Binding Location.StreetAddress}" />
+            <Label Text="{Binding Location.City}" />
+            <Label Text="{Binding Location.Town}" />
+            <Label Text="{Binding Location.PostalCode}" />
+
+            <!-- Treatment details -->
+            <Label Text="Treatments" />
+            <ListView ItemsSource="{Binding Treatments}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Label Text="{Binding TreatmentName}" />
+                            <Label Text="{Binding TreatmentDescription}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

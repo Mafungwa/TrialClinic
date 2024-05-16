@@ -8,21 +8,18 @@ using SQLite;
 
 namespace TrialClinic.Models
 {
-    public class RecruitmentEffort
+    public class Enrollment
     {
         [PrimaryKey, AutoIncrement]
+        public int EnrollmentId { get; set; }
 
-        public int RecruitmentEffortId { get; set; }
+        public int UserId { get; set; }
 
-        [ForeignKey(nameof(UserType))]
+        public int EnrollmentStatusId { get; set; }
 
-        public UserType UserTypeId { get; set;}
+        public int TrialId { get; set; }
 
-        [ForeignKey(nameof(Trial))]
-
-        public Trial Trial { get; set;}
-
-        public DateOnly RecruitmentDate { get; set; }
+        public DateOnly EnrollmentDate { get; set; }
 
         public string Status { get; set; }
     }

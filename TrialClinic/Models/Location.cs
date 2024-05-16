@@ -11,7 +11,9 @@ namespace TrialClinic.Models
     {
 
         [PrimaryKey, AutoIncrement]
-        public string LocationId { get; set; }
+        public int LocationId { get; set; }
+
+        public string LocationName { get; set; }
 
         public string StreetAddress { get; set; }
         public string City { get; set; }

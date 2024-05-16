@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrialClinic.Pages.UserPage"
+             Title="User Registration">
+    <VerticalStackLayout>
+        <Entry x:Name="UserNameEntry" Placeholder="Username" />
+        <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True" />
+        <Entry x:Name="EmailEntry" Placeholder="Email" />
+        <Entry x:Name="PhoneNumberEntry" Placeholder="Phone Number" />
+        <Entry x:Name="GenderEntry" Placeholder="Gender" />
+        <Entry x:Name="PhysicalAddressEntry" Placeholder="Physical Address" />
+        <DatePicker x:Name="DateOfBirthPicker" />
+
+        <Picker x:Name="UserTypePicker" Title="Select User Type">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Participant</x:String>
+                    <x:String>Recruiter</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Button Text="Sign Up" Clicked="OnSignUpButtonClicked" />
+        <Button Text="Login" Clicked="OnLoginButtonClicked" />
+        <Button Text="Toggle Sign Up/Login" Clicked="OnToggleSignUpLoginButtonClicked" />
+    </VerticalStackLayout>
+</ContentPage>
