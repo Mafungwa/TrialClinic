@@ -18,6 +18,7 @@ namespace TrialClinic.Models
         public DateTime CreatedDate { get; set; }
 
         [ForeignKey(nameof(UserType))]
+
         public int UserTypeId { get; set; }
     }
 }

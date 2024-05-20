@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrialClinic.Pages.StartPage"
+             xmlns:pages="clr-namespace:TrialClinic.Pages"
+             BackgroundImageSource="bluebackground.png"
+             Title="">
+    <Grid>
+        <Label Text="FIND CLINICAL TRIALS FOR YOUR CONDITION" 
+           HorizontalOptions="Center"
+           VerticalOptions="CenterAndExpand"
+           FontSize="30"
+           FontAttributes="Bold"
+           TextColor="White"
+           Margin="110,-250,50,250">
+        </Label>
+        <ImageButton Source="dotnet_bot.png" 
+                 HorizontalOptions="CenterAndExpand"
+                 VerticalOptions="EndAndExpand"
+                 HeightRequest="80"
+                 WidthRequest="80"
+                 IsEnabled="True"
+                 Clicked="ImageButton_OnClicked"  
+                 Aspect="AspectFill">
+
+        </ImageButton>
+    </Grid>
+</ContentPage>

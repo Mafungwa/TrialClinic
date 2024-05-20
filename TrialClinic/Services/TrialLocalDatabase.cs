@@ -36,7 +36,6 @@ namespace TrialClinic.Services
             _dbconnection.CreateTable<EnrollmentStatus>();
             _dbconnection.CreateTable<Enrollment>();
             _dbconnection.CreateTable<Language>();
-            _dbconnection.CreateTable<Translation>();
             _dbconnection.CreateTable<ChatMessage>();
             _dbconnection.CreateTable<PrivateChat>();
             _dbconnection.CreateTable<TrialTreatment>();
@@ -77,25 +76,6 @@ namespace TrialClinic.Services
         {
             return _dbconnection.Table<UserType>().ToList();
         }
-
-
-
-
-
-        /*public List<User> GetAllUserProfile()
-        {
-            return _dbconnection.Table<User>().ToList();
-        }
-
-        public User GetUserProfileById(int id)
-        {
-            return _dbconnection.Table<User>().Where(x => x.UserId == id).FirstOrDefault();
-        }
-
-        /*public void UpdateUserProfile(User userProfile)
-        {
-            _dbconnection.Update(userProfile);
-        }*/
         public void InsertUser(User user)
         {
             _dbconnection.Insert(user);
