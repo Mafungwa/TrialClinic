@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SQLite;
 using TrialClinic.Models;
+using TrialClinic.Pages;
 using Location = TrialClinic.Models.Location;
 
 namespace TrialClinic.Services
@@ -47,7 +48,7 @@ namespace TrialClinic.Services
 
         public void SeedDatabase()
         {
-            if (_dbconnection.Table<User>().Count() ==0 ) 
+            if (_dbconnection.Table<UserType>().Count() ==0 ) 
             {
                 _dbconnection.Insert(new UserType { TypeName = "Participant" });
                 _dbconnection.Insert(new UserType { TypeName = "Recruiter" });
@@ -65,11 +66,11 @@ namespace TrialClinic.Services
             return _dbconnection.Table<PrivateChat>().ToList();
         }
 
-        public User GetUserByCredentials(string username, string password)
+        public User GetUserByCredentials(string email, string password)
         {
             return _dbconnection.Table<User>()
-                   .Where(u => u.UserName == username && u.Password == password)
-                   .FirstOrDefault();
+                       .Where(u => u.Email == email && u.Password == password)
+                       .FirstOrDefault();
         }
 
         public List<UserType> GetUserTypes()

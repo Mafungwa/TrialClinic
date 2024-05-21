@@ -12,10 +12,12 @@ public partial class UserPage : ContentPage
 
     public bool IsSigningUp { get; private set; }
 
-    public UserPage()
+    public UserPage(TrialLocalDatabase database)
     {
         InitializeComponent();
-        _database = new TrialLocalDatabase();
+
+        _database = database;
+        //   _database = new TrialLocalDatabase();
         _userTypes = _database.GetUserTypes();
 
         // Populate UserTypePicker
@@ -65,37 +67,5 @@ public partial class UserPage : ContentPage
 
         _database.InsertUser(newUser);
         await DisplayAlert("Success", "User created successfully!", "OK");
-    }
-
-    private async void OnLoginButtonClicked(object sender, EventArgs e)
-    {
-        if (string.IsNullOrEmpty(EmailEntry.Text) || string.IsNullOrEmpty(PasswordEntry.Text))
-        {
-            await DisplayAlert("Error", "Please enter email and password", "OK");
-            return;
-        }
-
-        var user = _database.GetUserByCredentials(EmailEntry.Text, PasswordEntry.Text);
-
-        if (user != null)
-        {
-            if (user.UserTypeId == _userTypes.First(ut => ut.TypeName == "Participant").UserTypeId)
-            {
-                await Navigation.PushAsync(new ParticipantPage(user));
-            }
-            else if (user.UserTypeId == _userTypes.First(ut => ut.TypeName == "Recruiter").UserTypeId)
-            {
-                await Navigation.PushAsync(new RecruiterPage(user));
-            }
-        }
-        else
-        {
-            await DisplayAlert("Error", "Invalid credentials", "OK");
-        }
-    }
-
-    private void OnToggleSignUpLoginButtonClicked(object sender, EventArgs e)
-    {
-        IsSigningUp = !IsSigningUp; // Toggle between sign-up and login
     }
 }

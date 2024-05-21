@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using TrialClinic.Pages;
+using TrialClinic.Services;
 
 namespace TrialClinic
 {
@@ -18,6 +20,14 @@ namespace TrialClinic
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+
+            builder.Services.AddTransient<UserPage>();
+
+            builder.Services.AddTransient<ParticipantPage>();
+
+            builder.Services.AddTransient<SignInPage>();
+
+            builder.Services.AddSingleton<TrialLocalDatabase>();
 
             return builder.Build();
         }
