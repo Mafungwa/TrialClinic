@@ -172,6 +172,16 @@ namespace TrialClinic.Services
         {
             return _dbconnection.Table<RecruitmentStatus>().FirstOrDefault(rs => rs.RecruitmentStatusId == id);
         }
+
+        internal IEnumerable<ChatMessage> GetMessagesByForum(int currentTrialId)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void SaveChatMessage(ChatMessage message)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 
