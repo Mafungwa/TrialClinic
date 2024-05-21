@@ -17,17 +17,19 @@ namespace TrialClinic.Models
 
         public int MessageId { get; set; }
 
-        [ForeignKey(nameof(UserType))]
+        [ForeignKey(nameof(User))]
 
-        public UserType SenderId { get; set;}
+        public int SenderId { get; set;}
 
-        [ForeignKey(nameof(UserType))]
+        [ForeignKey(nameof(User))]
 
-        public UserType RecieverId { get; set;}
+        public int RecieverId { get; set;}
 
         public string MessageContent { get; set;}
 
+
         public DateTime DateTime { get; set;}
         public int UserId { get; internal set; }
+        public DateTime MessageDate { get; set;}
     }
 }

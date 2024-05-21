@@ -1,7 +1,7 @@
 using TrialClinic.Models;
 using TrialClinic.Services;
 using System.Collections.Generic;
-using Location = TrialClinic.Models.Location; // Add this namespace
+using Location = TrialClinic.Models.Location; 
 
 namespace TrialClinic.Pages;
 
@@ -10,8 +10,8 @@ public partial class TrialDetailsPage : ContentPage
     private TrialLocalDatabase _database;
     private Trial _trial;
     private Location _location;
-    private List<Treatment> _treatments; // Add the list of treatments
-
+    private List<Treatment> _treatments; 
+     
     public TrialDetailsPage(int trialId)
     {
         InitializeComponent();

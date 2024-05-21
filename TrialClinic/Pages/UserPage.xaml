@@ -12,17 +12,8 @@
         <Entry x:Name="PhysicalAddressEntry" Placeholder="Physical Address" />
         <DatePicker x:Name="DateOfBirthPicker" />
 
-        <Picker x:Name="UserTypePicker" Title="Select User Type">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Participant</x:String>
-                    <x:String>Recruiter</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
+        <Picker x:Name="UserTypePicker" Title="Select User Type"/>
 
         <Button Text="Sign Up" Clicked="OnSignUpButtonClicked" />
-        <Button Text="Login" Clicked="OnLoginButtonClicked" />
-        <Button Text="Toggle Sign Up/Login" Clicked="OnToggleSignUpLoginButtonClicked" />
     </VerticalStackLayout>
 </ContentPage>

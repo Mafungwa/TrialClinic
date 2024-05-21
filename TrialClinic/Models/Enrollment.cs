@@ -19,7 +19,7 @@ namespace TrialClinic.Models
 
         public int TrialId { get; set; }
 
-        public DateOnly EnrollmentDate { get; set; }
+        public DateTime EnrollmentDate { get; set; }
 
         public string Status { get; set; }
     }

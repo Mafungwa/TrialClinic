@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrialClinic.Pages.Disclaimer"
+             BackgroundImageSource="bluebackground.png" BackgroundColor="#80000000">
+    <StackLayout>
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+           
+            <Label Text="Disclaimer"
+                Grid.Row="0"
+                
+                FontSize="Large"
+                FontAttributes="Bold"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="EndAndExpand"
+                Margin="0,20,0,0"
+                TextColor="White"/>
+
+           <BoxView 
+                Grid.Row="1"
+                
+                Margin="45,0,10,0"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="StartAndExpand"
+                HeightRequest="100"
+                WidthRequest="300"
+                BackgroundColor="WhiteSmoke"
+                CornerRadius="30"/>
+
+            <StackLayout Spacing="10" Padding="10" HorizontalOptions="Center"  Grid.Row="2">
+                <Button 
+                Grid.Row="2"
+                WidthRequest="200"
+                Text="Sign Up"
+                Clicked="SignUpButton_onClicked"
+                Margin="0,0,0,0"/>
+
+            <Button
+                Grid.Row="3"
+                
+                Text="Sign In"
+                Clicked="SignInButton_onClicked"
+                Margin="0,0,0,0"/>
+            </StackLayout>
+        </Grid>
+    </StackLayout>
+</ContentPage>
