@@ -34,7 +34,7 @@ public partial class SignInPage : ContentPage
             }
             else if (user.UserTypeId == _userTypes.First(ut => ut.TypeName == "Recruiter").UserTypeId)
             {
-                await Shell.Current.GoToAsync("home");
+                await Shell.Current.GoToAsync("recruiter");
             }
         }
         else
