@@ -5,36 +5,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:TrialClinic.Pages"
     Shell.FlyoutBehavior="Disabled"
-    Title="">
+    Title="TrialClinic">
 
-    <ShellContent ContentTemplate="{DataTemplate local:StartPage}" Route="StartPage"/>
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:StartPage}"
+        Route="SartPage" />
 
-    <TabBar>
-
-        <Tab Title="Home" >
-
-            <ShellContent ContentTemplate="{DataTemplate local:Home}" Route="Home"/>
-
-
-        </Tab>
-
-
-        <Tab Title="Forums">
-
-            <ShellContent ContentTemplate="{DataTemplate local:Forums}" Route="Forums"/>
-
-
-        </Tab>
-
-
-        <Tab Title="Chat">
-
-            <ShellContent ContentTemplate="{DataTemplate local:PrivateChatPage}" Route="PrivateChatPage"/>
-
-
-        </Tab>
-
-    </TabBar>
+    
 
 </Shell>
-
