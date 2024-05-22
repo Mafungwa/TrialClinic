@@ -21,5 +21,8 @@ namespace TrialClinic.Models
         [ManyToOne]
         public Trial Trial { get; set; }
 
+        public string TranslatedDescription { get; set; }
+
+        public string Language { get; set; }
     }
 }

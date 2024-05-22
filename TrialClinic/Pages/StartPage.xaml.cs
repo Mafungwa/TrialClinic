@@ -12,4 +12,11 @@ public partial class StartPage : ContentPage
     {
         await Shell.Current.GoToAsync("Disclaimer");
     }
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddScoped<TrialClinic.Models.User>();
+        // Other service configurations...
+    }
+
+
 }

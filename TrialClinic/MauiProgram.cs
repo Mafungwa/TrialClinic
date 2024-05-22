@@ -18,16 +18,17 @@ namespace TrialClinic
                 });
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             builder.Services.AddTransient<UserPage>();
-
             builder.Services.AddTransient<ParticipantPage>();
-
             builder.Services.AddTransient<SignInPage>();
-
             builder.Services.AddSingleton<TrialLocalDatabase>();
+            builder.Services.AddTransient<RecruiterPage>();
+
+            // Register the User service
+            builder.Services.AddScoped<TrialClinic.Models.User>();
 
             return builder.Build();
         }
