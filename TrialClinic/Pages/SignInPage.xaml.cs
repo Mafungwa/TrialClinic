@@ -34,12 +34,14 @@ public partial class SignInPage : ContentPage
             }
             else if (user.UserTypeId == _userTypes.First(ut => ut.TypeName == "Recruiter").UserTypeId)
             {
-                await Shell.Current.GoToAsync("recruiterpage");
+                await Shell.Current.GoToAsync("home");
             }
         }
         else
         {
             await DisplayAlert("Error", "Invalid credentials", "OK");
         }
+
+
     }
 }

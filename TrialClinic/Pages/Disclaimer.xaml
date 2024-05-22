@@ -3,54 +3,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TrialClinic.Pages.Disclaimer"
              BackgroundImageSource="bluebackground.png" BackgroundColor="#80000000">
-    <StackLayout>
-        <Grid>
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
+           <Grid>
            
-            <Label Text="Disclaimer"
-                Grid.Row="0"
-                
-                FontSize="Large"
-                FontAttributes="Bold"
-                HorizontalOptions="CenterAndExpand"
-                VerticalOptions="EndAndExpand"
-                Margin="0,20,0,0"
-                TextColor="White"/>
+        <Frame 
+         CornerRadius="30"
+         HeightRequest="500"
+         WidthRequest="350"
+         VerticalOptions="Center"
+         HorizontalOptions="FillAndExpand"
+         Margin="0,-200,0,0"/>
 
-           <BoxView 
-                Grid.Row="1"
-                
-                Margin="45,0,10,0"
-                HorizontalOptions="CenterAndExpand"
-                VerticalOptions="StartAndExpand"
-                HeightRequest="100"
-                WidthRequest="300"
-                BackgroundColor="WhiteSmoke"
-                CornerRadius="30"/>
+        <Label Text="DISCLAIMER"
+    
+         FontSize="30"
+         FontAttributes="Bold"
+         HorizontalOptions="CenterAndExpand"
+         VerticalOptions="StartAndExpand"
+         Margin="0,20,0,0"
+         TextColor="Red"/>
 
-            <StackLayout Spacing="10" Padding="10" HorizontalOptions="Center"  Grid.Row="2">
-                <Button 
-                Grid.Row="2"
-                WidthRequest="200"
-                Text="Sign Up"
-                Clicked="SignUpButton_onClicked"
-                Margin="0,0,0,0"/>
+        <ImageButton Source="sign_in.png" 
+              HorizontalOptions="Center"
+              VerticalOptions="EndAndExpand"
+              WidthRequest="270"
+              IsEnabled="True"
+              Clicked="ImageButton_SignInClicked"  
+              Aspect="AspectFill" Margin="0,0,8,120">
+        </ImageButton>
+    
+        <ImageButton Source="sign_up.png" 
+              HorizontalOptions="Center"
+              VerticalOptions="EndAndExpand"
+              WidthRequest="270"
+              IsEnabled="True"
+              Clicked="ImageButton_SignUpClicked"  
+              Aspect="AspectFill" Margin="0,0,8,50">
 
-            <Button
-                Grid.Row="3"
-                
-                Text="Sign In"
-                Clicked="SignInButton_onClicked"
-                Margin="0,0,0,0"/>
-            </StackLayout>
+            </ImageButton>
+            
         </Grid>
-    </StackLayout>
 </ContentPage>

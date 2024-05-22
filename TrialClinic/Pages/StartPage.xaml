@@ -7,22 +7,20 @@
              Title="">
     <Grid>
         <Label Text="FIND CLINICAL TRIALS FOR YOUR CONDITION" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand"
-           FontSize="30"
-           FontAttributes="Bold"
-           TextColor="White"
-           Margin="110,-250,50,250">
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand"
+               FontSize="30"
+               FontAttributes="Bold"
+               TextColor="White"
+               Margin="38,-500,0,0">
         </Label>
-        <ImageButton Source="dotnet_bot.png" 
-                 HorizontalOptions="CenterAndExpand"
-                 VerticalOptions="EndAndExpand"
-                 HeightRequest="80"
-                 WidthRequest="80"
-                 IsEnabled="True"
-                 Clicked="ImageButton_OnClicked"  
-                 Aspect="AspectFill">
-
+        <ImageButton Source="get_started.png" 
+                     HorizontalOptions="CenterAndExpand"
+                     VerticalOptions="EndAndExpand"
+                     WidthRequest="270"
+                     IsEnabled="True"
+                     Clicked="ImageButton_OnClicked"  
+                     Aspect="AspectFill" Margin="0,85">
         </ImageButton>
     </Grid>
-</ContentPage>
+</ContentPage> 
