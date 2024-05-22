@@ -30,7 +30,7 @@ public partial class SignInPage : ContentPage
         {
             if (user.UserTypeId == _userTypes.First(ut => ut.TypeName == "Participant").UserTypeId)
             {
-                await Shell.Current.GoToAsync("home");
+                await Shell.Current.GoToAsync("participantpage");
             }
             else if (user.UserTypeId == _userTypes.First(ut => ut.TypeName == "Recruiter").UserTypeId)
             {
