@@ -11,6 +11,8 @@ namespace TrialClinic.Models
 {
     public class ChatMessage
     {
+        internal int ForumId;
+
         [PrimaryKey, AutoIncrement]
 
         public int MessageId { get; set; }
@@ -25,6 +27,9 @@ namespace TrialClinic.Models
 
         public string MessageContent { get; set;}
 
+
+        public DateTime DateTime { get; set;}
+        public int UserId { get; internal set; }
         public DateTime MessageDate { get; set;}
     }
 }

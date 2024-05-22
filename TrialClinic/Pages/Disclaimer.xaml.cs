@@ -7,12 +7,14 @@ public partial class Disclaimer : ContentPage
         InitializeComponent();
     }
 
-    private async void SignUpButton_onClicked(object sender, EventArgs e)
+    private async void ImageButton_SignUpClicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("userpage");
     }
 
-    private async void SignInButton_onClicked(Object sender, EventArgs e)
+   
+    private async void ImageButton_SignInClicked(object sender, EventArgs e)
+
     {
         await Shell.Current.GoToAsync("signinpage");
     }
