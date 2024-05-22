@@ -19,6 +19,11 @@
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="Button_Clicked"
                 HorizontalOptions="Fill" />
+
+            <!--<Grid>
+                <Button x:Name="myButton" Clicked="Button_Click"/>
+            </Grid>-->
+            
         </VerticalStackLayout>
     </ScrollView>
 

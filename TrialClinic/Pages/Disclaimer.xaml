@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TrialClinic.Pages.Disclaimer"
-             BackgroundImageSource="bluebackground.png" BackgroundColor="#80000000">
+             xmlns:pages="clr-namespace:TrialClinic.Pages"
+             BackgroundImageSource="bluebackground.png" >
            <Grid>
            
         <Frame 

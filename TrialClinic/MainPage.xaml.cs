@@ -19,6 +19,11 @@ namespace TrialClinic
         {
             Navigation.PushAsync(new PrivateChatPage());   
         }
-    }
+
+        private void myButton_Click(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ChatMessagePage());
+        }
 
 }
+    }
