@@ -28,7 +28,6 @@ namespace TrialClinic
             builder.Services.AddSingleton<TrialLocalDatabase>();
             builder.Services.AddSingleton<TranslationService>();
             builder.Services.AddTransient<CreateTrialPage>();
-
             builder.Services.AddTransient<RecruiterPage>();
 
             // Register the User service
