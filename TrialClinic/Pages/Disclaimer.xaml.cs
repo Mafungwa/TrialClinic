@@ -5,6 +5,8 @@ public partial class Disclaimer : ContentPage
     public Disclaimer()
     {
         InitializeComponent();
+
+        
     }
 
     private async void ImageButton_SignUpClicked(object sender, EventArgs e)

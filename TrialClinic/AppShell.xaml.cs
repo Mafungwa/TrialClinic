@@ -19,6 +19,7 @@ namespace TrialClinic
             Routing.RegisterRoute("recruiterpage", typeof(RecruiterPage));
             Routing.RegisterRoute("createtrialpage" , typeof(CreateTrialPage));
 
+
         }
 
     }
