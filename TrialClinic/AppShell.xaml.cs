@@ -17,6 +17,7 @@ namespace TrialClinic
             Routing.RegisterRoute("participantpage", typeof(ParticipantPage));
             Routing.RegisterRoute("signinpage", typeof(SignInPage));
             Routing.RegisterRoute("recruiterpage", typeof(RecruiterPage));
+            Routing.RegisterRoute("createtrialpage" , typeof(CreateTrialPage));
 
         }
 

@@ -8,10 +8,10 @@ public partial class RecruitmentStatusPage : ContentPage
     private TrialLocalDatabase _database;
     private User _user;
 
-    public RecruitmentStatusPage(User user, int trialId)
+    public RecruitmentStatusPage(User user, int trialId, TrialLocalDatabase database)
     {
         InitializeComponent();
-        _database = new TrialLocalDatabase();
+        _database = database;
         _user = user;
 
         LoadRecruitmentStatuses(trialId);

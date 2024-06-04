@@ -8,10 +8,10 @@ public partial class EnrollmentStatusPage : ContentPage
     private TrialLocalDatabase _database;
     private User _user;
 
-    public EnrollmentStatusPage(User user, int trialId)
+    public EnrollmentStatusPage(User user, int trialId, TrialLocalDatabase database)
     {
         InitializeComponent();
-        _database = new TrialLocalDatabase();
+        _database = database;
         _user = user;
 
         LoadEnrollmentStatuses(trialId);
@@ -20,6 +20,7 @@ public partial class EnrollmentStatusPage : ContentPage
     private void LoadEnrollmentStatuses(int trialId)
     {
         var enrollments = _database.GetEnrollmentsForUser(_user.UserId, trialId);
+        EnrollmentStatusListView.ItemsSource = enrollments;
         foreach (var enrollment in enrollments)
         {
             var status = _database.GetEnrollmentStatusById(enrollment.EnrollmentStatusId);

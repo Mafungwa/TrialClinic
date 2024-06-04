@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CloudKit;
 using SQLite;
 using TrialClinic.Models;
 using TrialClinic.Pages;
@@ -13,6 +14,7 @@ namespace TrialClinic.Services
     public class TrialLocalDatabase
     {
         private SQLiteConnection _dbconnection;
+        private TranslationService _translationService;
 
         public string GetDatabasePath()
         {
@@ -21,14 +23,17 @@ namespace TrialClinic.Services
             return Path.Combine(pathToDb, fileName);
         }
 
-        public TrialLocalDatabase() 
+        public TrialLocalDatabase(TranslationService translationService) 
         {
             _dbconnection = new SQLiteConnection(GetDatabasePath());
+            _translationService = translationService;
 
 
-            _dbconnection.CreateTable<User>();
-            _dbconnection.CreateTable<UserType>();
+            _dbconnection.CreateTable<User>(CreateFlags.AutoIncPK);
+            _dbconnection.CreateTable<Recruiter>();
+            _dbconnection.CreateTable<Participant>();
             _dbconnection.CreateTable<Trial>();
+            _dbconnection.CreateTable<TrialTranslation>();
             _dbconnection.CreateTable<Models.Location>();
             _dbconnection.CreateTable<Treatment>();
             _dbconnection.CreateTable<Results>();
@@ -40,6 +45,7 @@ namespace TrialClinic.Services
             _dbconnection.CreateTable<ChatMessage>();
             _dbconnection.CreateTable<PrivateChat>();
             _dbconnection.CreateTable<TrialTreatment>();
+            _dbconnection.CreateTable<Update>();
 
 
             SeedDatabase();
@@ -54,6 +60,74 @@ namespace TrialClinic.Services
                 _dbconnection.Insert(new UserType { TypeName = "Recruiter" });
 
             }
+        }
+
+        public async Task InsertTrialWithTranslations(Trial trial)
+        {
+            _dbconnection.Insert(trial);
+
+            var translations = new List<TrialTranslation>();
+
+            var languages = new[] { "xh", "zu", "af" };
+            foreach (var language in languages)
+            {
+                var translatedText = await _translationService.TranslateText(trial.TrialDescription, language);
+                translations.Add(new TrialTranslation
+                {
+                    TrialId = trial.TrialId,
+                    LanguageCode = language,
+                    TranslatedDescription = translatedText
+                });
+            }
+
+            _dbconnection.InsertAll(translations);
+        }
+
+        public Trial GetTrialByRecruiterId(int recruiterId)
+        {
+            return _dbconnection.Table<Trial>().FirstOrDefault(t => t.RecruiterId == recruiterId);
+        }
+
+
+        public List<Update> GetUpdates()
+        {
+            return _dbconnection.Table<Update>().OrderByDescending(u => u.Date).ToList();
+        }
+
+        public List<User> GetParticipantsForTrial(int trialId)
+        {
+            return _dbconnection.Table<User>().Where(u => u.TrialId == trialId).ToList();
+        }
+
+        public void RemoveParticipantFromTrial(int userId)
+        {
+            var user = _dbconnection.Table<User>().FirstOrDefault(u => u.UserId == userId);
+            if (user != null)
+            {
+                user.TrialId = -1;
+                _dbconnection.Update(user);
+            }
+        }
+
+
+        public List<Trial> GetTrials()
+        {
+            return _dbconnection.Table<Trial>().ToList();
+        }
+
+        /*public void UpdateTrial(Trial trial)
+        {
+            _dbconnection.Update(trial);
+        }*/
+
+        public List<User> GetParticipants()
+        {
+            return _dbconnection.Table<User>().ToList();
+        }
+
+        public List<TrialTranslation> GetTranslationsForTrial(int trialId)
+        {
+            return _dbconnection.Table<TrialTranslation>().Where(t => t.TrialId == trialId).ToList();
         }
 
         public void SaveChatMessage(PrivateChat chatMessage)

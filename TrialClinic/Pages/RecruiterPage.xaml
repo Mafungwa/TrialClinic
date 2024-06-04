@@ -1,12 +1,26 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TrialClinic.Pages.RecruiterPage"
-             Title="RecruiterPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Recruiter Page">
+    <StackLayout>
+        <Label Text="Dashboard Overview" FontSize="Large" />
+        <Label Text="{Binding ActiveTrialsCount, StringFormat='Active Trials: {0}'}" />
+        <Label Text="{Binding CompletedTrialsCount, StringFormat='Completed Trials: {0}'}" />
+        <Label Text="{Binding ParticipantsCount, StringFormat='Participants: {0}'}" />
+
+        <ListView ItemsSource="{Binding Trials}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding TrialName}" />
+                            <Label Text="{Binding ParticipantCount, StringFormat='Participants: {0}'}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Text="Create Trial" Clicked="OnCreateTrialButtonClicked" />
+    </StackLayout>
 </ContentPage>

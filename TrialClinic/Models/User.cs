@@ -17,8 +17,9 @@ namespace TrialClinic.Models
         public DateTime DateOfBirth { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        [ForeignKey(nameof(UserType))]
+        public string Role {  get; set; }
 
-        public int UserTypeId { get; set; }
+        [ForeignKey(nameof(Trial))]
+        public int TrialId { get; set; }
     }
 }

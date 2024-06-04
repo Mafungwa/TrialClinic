@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrialClinic.Pages.CreateTrialPage"
+             Title="CreateTrialPage">
+    <VerticalStackLayout>
+        <Entry x:Name="TrialNameEntry" Placeholder="Trial Name" />
+        <Entry x:Name="TrialPhaseEntry" Placeholder="Trial Phase" />
+        <DatePicker x:Name="TrialStartDatePicker" />
+        <DatePicker x:Name="TrialEndDatePicker" />
+        <Entry x:Name="LocationIdEntry" Placeholder="Location ID" />
+        <Editor x:Name="TrialDescriptionEditor" Placeholder="Trial Description" />
+        <Button Text="Create Trial" Clicked="OnCreateTrialButtonClicked" />
+    </VerticalStackLayout>
+</ContentPage>

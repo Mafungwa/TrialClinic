@@ -16,12 +16,12 @@ public partial class ChatMessagePage : ContentPage
 
     public ObservableCollection<ChatMessage> Messages { get; set; }
 
-    public ChatMessagePage()
+    public ChatMessagePage(TrialLocalDatabase database)
     {
 
         InitializeComponent();
 
-        _database = new TrialLocalDatabase();
+        _database = database;
         // _currentTrialId = trialId;
 
         _currentTrialId = 0;

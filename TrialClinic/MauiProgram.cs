@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using TrialClinic.Pages;
 using TrialClinic.Services;
 
@@ -25,6 +26,9 @@ namespace TrialClinic
             builder.Services.AddTransient<ParticipantPage>();
             builder.Services.AddTransient<SignInPage>();
             builder.Services.AddSingleton<TrialLocalDatabase>();
+            builder.Services.AddSingleton<TranslationService>();
+            builder.Services.AddTransient<CreateTrialPage>();
+
             builder.Services.AddTransient<RecruiterPage>();
 
             // Register the User service

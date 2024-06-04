@@ -18,13 +18,8 @@ public partial class UserPage : ContentPage
 
         _database = database;
         //   _database = new TrialLocalDatabase();
-        _userTypes = _database.GetUserTypes();
-
-        // Populate UserTypePicker
-        foreach (var userType in _userTypes)
-        {
-            UserTypePicker.Items.Add(userType.TypeName);
-        }
+        RolePicker.Items.Add("Recruiter");
+        RolePicker.Items.Add("Participant");
 
         BindingContext = this;
     }
@@ -37,18 +32,9 @@ public partial class UserPage : ContentPage
             string.IsNullOrEmpty(PhoneNumberEntry.Text) ||
             string.IsNullOrEmpty(GenderEntry.Text) ||
             string.IsNullOrEmpty(PhysicalAddressEntry.Text) ||
-            UserTypePicker.SelectedItem == null)
+            RolePicker.SelectedItem == null)
         {
             await DisplayAlert("Error", "Please fill all fields", "OK");
-            return;
-        }
-
-        var selectedUserType = _userTypes.FirstOrDefault(ut =>
-                                   ut.TypeName == UserTypePicker.SelectedItem.ToString());
-
-        if (selectedUserType == null)
-        {
-            await DisplayAlert("Error", "Invalid User Type", "OK");
             return;
         }
 
@@ -62,7 +48,8 @@ public partial class UserPage : ContentPage
             PhysicalAddress = PhysicalAddressEntry.Text,
             DateOfBirth = DateOfBirthPicker.Date,
             CreatedDate = DateTime.Now,
-            UserTypeId = selectedUserType.UserTypeId
+            Role = RolePicker.SelectedItem.ToString()
+
         };
 
         _database.InsertUser(newUser);

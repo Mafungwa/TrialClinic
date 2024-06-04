@@ -24,5 +24,6 @@ namespace TrialClinic.Models
         public string TranslatedDescription { get; set; }
 
         public string Language { get; set; }
+        public string LanguageCode { get; internal set; }
     }
 }

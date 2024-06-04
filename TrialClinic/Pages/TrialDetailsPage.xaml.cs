@@ -12,10 +12,10 @@ public partial class TrialDetailsPage : ContentPage
     private Location _location;
     private List<Treatment> _treatments; 
      
-    public TrialDetailsPage(int trialId)
+    public TrialDetailsPage(int trialId, TrialLocalDatabase database)
     {
         InitializeComponent();
-        _database = new TrialLocalDatabase();
+        _database = database;
         _trial = _database.GetTrialById(trialId);
         _location = _database.GetLocationById(_trial.LocationId);
         _treatments = _database.GetTreatmentsForTrial(trialId); // Retrieve treatments

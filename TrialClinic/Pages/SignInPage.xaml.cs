@@ -6,14 +6,12 @@ namespace TrialClinic.Pages;
 public partial class SignInPage : ContentPage
 {
     private TrialLocalDatabase _database;
-    private List<UserType> _userTypes;
 
     public SignInPage(TrialLocalDatabase database)
     {
         InitializeComponent();
 
         _database = database;
-        _userTypes = _database.GetUserTypes();
     }
 
     private async void OnSigninButtonClicked(object sender, EventArgs e)
@@ -28,20 +26,22 @@ public partial class SignInPage : ContentPage
 
         if (user != null)
         {
-            if (user.UserTypeId == _userTypes.First(ut => ut.TypeName == "Participant").UserTypeId)
+            if (user.Role == "Participant")
             {
                 await Shell.Current.GoToAsync("participantpage");
             }
-            else if (user.UserTypeId == _userTypes.First(ut => ut.TypeName == "Recruiter").UserTypeId)
+            else if (user.Role == "Recruiter")
             {
-                await Shell.Current.GoToAsync("recruiter");
+                // Get the trial associated with the recruiter
+                var trial = _database.GetTrialByRecruiterId(user.UserId);
+
+                // Navigate to the trial page
+                await Shell.Current.GoToAsync($"trialpage?trialId={trial.TrialId}");
             }
         }
         else
         {
             await DisplayAlert("Error", "Invalid credentials", "OK");
         }
-
-
     }
 }
