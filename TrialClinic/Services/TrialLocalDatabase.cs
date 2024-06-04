@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CloudKit;
-using SQLite;
+﻿using SQLite;
 using TrialClinic.Models;
-using TrialClinic.Pages;
 using Location = TrialClinic.Models.Location;
 
 namespace TrialClinic.Services
