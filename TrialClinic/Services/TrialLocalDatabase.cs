@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CloudKit;
 using SQLite;
 using TrialClinic.Models;
 using TrialClinic.Pages;
@@ -45,7 +44,6 @@ namespace TrialClinic.Services
             _dbconnection.CreateTable<ChatMessage>();
             _dbconnection.CreateTable<PrivateChat>();
             _dbconnection.CreateTable<TrialTreatment>();
-            _dbconnection.CreateTable<Update>();
 
 
             SeedDatabase();
@@ -89,10 +87,10 @@ namespace TrialClinic.Services
         }
 
 
-        public List<Update> GetUpdates()
+        /*public List<Update> GetUpdates()
         {
             return _dbconnection.Table<Update>().OrderByDescending(u => u.Date).ToList();
-        }
+        }*/
 
         public List<User> GetParticipantsForTrial(int trialId)
         {

@@ -12,5 +12,6 @@ public partial class ParticipantPage : ContentPage
         _user = user;
 
         // Do something with _user
+
     }
 }

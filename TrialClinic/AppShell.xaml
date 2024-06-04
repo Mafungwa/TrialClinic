@@ -4,14 +4,13 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:TrialClinic.Pages"
-    Shell.FlyoutBehavior="Disabled"
-    Title="TrialClinic">
-
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:StartPage}"
-        Route="SartPage" />
-
+    Shell.FlyoutBehavior="Disabled">
     
+    
+    <ShellContent
+      ContentTemplate="{DataTemplate local:StartPage}">
+    </ShellContent>  
+
+   
 
 </Shell>
