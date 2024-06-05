@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,8 +10,6 @@ namespace TrialClinic.Models
 {
     public class Participant : User
     {
-        // Add additional properties for Participant here if needed
-
         [ForeignKey(nameof(Trial))]
         public int TrialId { get; set; }
 

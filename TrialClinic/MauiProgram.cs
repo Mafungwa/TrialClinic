@@ -23,7 +23,7 @@ namespace TrialClinic
 #endif
 
             builder.Services.AddTransient<UserPage>();
-            builder.Services.AddTransient<ParticipantPage>();
+            builder.Services.AddTransient<TrialDetailsPage>();
             builder.Services.AddTransient<SignInPage>();
             builder.Services.AddSingleton<TrialLocalDatabase>();
             builder.Services.AddSingleton<TranslationService>();

@@ -28,7 +28,7 @@ public partial class SignInPage : ContentPage
         {
             if (user.Role == "Participant")
             {
-                await Shell.Current.GoToAsync("participantpage");
+                await Shell.Current.GoToAsync("trialdetailspage");
             }
             else if (user.Role == "Recruiter")
             {

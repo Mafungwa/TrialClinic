@@ -1,7 +1,6 @@
 using TrialClinic.Models;
 using TrialClinic.Services;
-using System.Collections.Generic;
-using Location = TrialClinic.Models.Location; 
+using Location = TrialClinic.Models.Location;
 
 namespace TrialClinic.Pages;
 

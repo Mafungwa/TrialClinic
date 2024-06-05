@@ -18,9 +18,7 @@ public partial class UserPage : ContentPage
 
         _database = database;
         //   _database = new TrialLocalDatabase();
-        RolePicker.Items.Add("Recruiter");
-        RolePicker.Items.Add("Participant");
-
+        RolePicker.ItemsSource = new List<string> { "Recruiter", "Participant" };
         BindingContext = this;
     }
 

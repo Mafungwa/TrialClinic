@@ -46,12 +46,12 @@ namespace TrialClinic.Services
 
         public void SeedDatabase()
         {
-            if (_dbconnection.Table<UserType>().Count() ==0 ) 
+            /*if (_dbconnection.Table<UserType>().Count() ==0 ) 
             {
                 _dbconnection.Insert(new UserType { TypeName = "Participant" });
                 _dbconnection.Insert(new UserType { TypeName = "Recruiter" });
 
-            }
+            }*/
         }
 
         public async Task InsertTrialWithTranslations(Trial trial)
@@ -79,6 +79,13 @@ namespace TrialClinic.Services
         {
             return _dbconnection.Table<Trial>().FirstOrDefault(t => t.RecruiterId == recruiterId);
         }
+
+        /*public void InsertUser(User user)
+        {
+            _dbconnection.Insert(user);
+        }*/
+
+
 
 
         /*public List<Update> GetUpdates()
@@ -230,6 +237,5 @@ namespace TrialClinic.Services
             throw new NotImplementedException();
         }
     }
-
 
 }

@@ -12,14 +12,7 @@
         <Entry x:Name="PhysicalAddressEntry" Placeholder="Physical Address" />
         <DatePicker x:Name="DateOfBirthPicker" />
 
-        <Picker x:Name="RolePicker" Title="Select Role">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Recruiter</x:String>
-                    <x:String>Participant</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
+        <Picker x:Name="RolePicker" Title="Select Role" />
 
         <Button Text="Sign Up" Clicked="OnSignUpButtonClicked" />
     </VerticalStackLayout>
