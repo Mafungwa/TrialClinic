@@ -29,6 +29,7 @@ namespace TrialClinic
             builder.Services.AddSingleton<TranslationService>();
             builder.Services.AddTransient<CreateTrialPage>();
             builder.Services.AddTransient<RecruiterPage>();
+            builder.Services.AddTransient<TrialsListPage>();
 
             // Register the User service
             builder.Services.AddScoped<TrialClinic.Models.User>();

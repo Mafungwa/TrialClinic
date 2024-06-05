@@ -85,7 +85,10 @@ namespace TrialClinic.Services
             _dbconnection.Insert(user);
         }*/
 
-
+        public List<Trial> GetAllTrials()
+        {
+            return _dbconnection.Table<Trial>().ToList();
+        }
 
 
         /*public List<Update> GetUpdates()

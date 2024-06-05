@@ -28,15 +28,26 @@ public partial class SignInPage : ContentPage
         {
             if (user.Role == "Participant")
             {
-                await Shell.Current.GoToAsync("trialdetailspage");
+                await Shell.Current.GoToAsync("trialslistpage");
+
             }
             else if (user.Role == "Recruiter")
             {
                 // Get the trial associated with the recruiter
                 var trial = _database.GetTrialByRecruiterId(user.UserId);
+                if (trial != null)
+                {
+                    await Shell.Current.GoToAsync($"trialdetailspage?trialId={trial.TrialId}");
+                }
+                else
+                {
+                    bool createTrial = await DisplayAlert("Error", "No trial found for this recruiter", "Create Trial", "Cancel");
 
-                // Navigate to the trial page
-                await Shell.Current.GoToAsync($"trialpage?trialId={trial.TrialId}");
+                    if (createTrial)
+                    {
+                        await Shell.Current.GoToAsync("createtrialpage");
+                    }
+                }
             }
         }
         else
