@@ -22,6 +22,7 @@ namespace TrialClinic.Models
 
         [ForeignKey(nameof(Location))]
         public int LocationId { get; set; }
+        public string Location { get; set; }
 
         [ForeignKey(nameof(Recruiter))]
         public int RecruiterId { get; set; }

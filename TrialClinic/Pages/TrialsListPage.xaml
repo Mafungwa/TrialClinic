@@ -2,23 +2,102 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TrialClinic.Pages.TrialsListPage"
-             Title="Available Trials">
-    <ListView x:Name="TrialsListView"
-              ItemSelected="OnTrialSelected">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <StackLayout Padding="10">
-                        <Label Text="{Binding TrialName}" FontAttributes="Bold" FontSize="20"/>
-                        <Label Text="Phase: {Binding TrialPhase}" />
-                        <Label Text="Start Date: {Binding TrialStartDate}" />
-                        <Label Text="End Date: {Binding TrialEndDate}" />
-                        <Label Text="Description: {Binding TrialDescription}" />
-                        <Label Text="Status: {Binding Status}" />
-                        <Label Text="Participants: {Binding ParticipantCount}" />
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+             xmlns:models="clr-namespace:TrialClinic.Models"
+             BackgroundColor="White"
+             xmlns:pages="clr-namespace:TrialClinic.Pages"
+             x:DataType="pages:TrialsListPage">
+
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+
+        <Frame Grid.Row="0" BackgroundColor="#139"
+            CornerRadius="29"
+            Margin="-15"
+            HeightRequest="145"
+            VerticalOptions="StartAndExpand"
+            HorizontalOptions="FillAndExpand">
+
+
+            <SearchBar            
+                  Background="White"
+                  HeightRequest="25" 
+                  WidthRequest="200"
+                  HorizontalTextAlignment="Center"
+                  FontSize="15"
+                  FontAttributes="Bold"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="Center"
+                  TextColor="Black"/>
+
+        </Frame>
+
+        <Label Grid.Row="1" Text="Trials"
+               HeightRequest="25"
+              
+               FontSize="Large"
+                   Margin="20,50,0,0"
+               FontAttributes="Bold"
+               HorizontalOptions="Start"
+               TextColor="Black"/>
+
+        <Frame Grid.Row="2"
+                CornerRadius="15"
+                HeightRequest="550" 
+                WidthRequest="340" 
+                BackgroundColor="LightGray">
+
+            <ListView x:Name="TrialsListView" HasUnevenRows="True"
+              ItemSelected="OnTrialSelected" ItemsSource="{Binding Trials}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Trial" >
+                        <ViewCell >
+                            <Grid RowSpacing="2">
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Frame HasShadow="True" CornerRadius="20"   BorderColor="White">
+                                    <VerticalStackLayout Grid.Row ="0">
+                                        <Label Grid.Row ="0" Text="{Binding TrialName}"  FontAttributes="Bold" FontSize="25"  BackgroundColor="Transparent" TextColor="Black"/>
+                                        <Label Grid.Row ="1" Text="{Binding TrialPhase}" FontAttributes="Bold"/>
+                                        <Label Grid.Row ="2" Text="{Binding TrialStartDate}" FontAttributes="Bold"/>
+                                        <Label Grid.Row ="3" Text="{Binding TrialEndDate}" FontAttributes="Bold"/>
+                                        <Label Grid.Row ="4" Text="{Binding ParticipantCount}" FontAttributes="Bold"/>
+
+                                        <Frame VerticalOptions="Fill" HorizontalOptions="Start"  HasShadow="True" CornerRadius="20" Padding="20,5"  BorderColor="#007bff">
+                                        <Label Grid.Row ="5" Text="{Binding Status}" FontAttributes="Bold"/>
+                                        </Frame>
+                                        <Frame VerticalOptions="Fill" HorizontalOptions="End"  HasShadow="True" CornerRadius="20" Padding="20,5"  BorderColor="#007bff">
+                                            <Label Grid.Row ="5" Text="{Binding TrialDescription}"  FontAttributes="Bold"/>
+                                        </Frame>
+
+                                        <Frame VerticalOptions="Fill" HorizontalOptions="Start"  HasShadow="True" CornerRadius="20" Padding="20,5"  BorderColor="#007bff">
+                                            <Label Grid.Row ="7" Text="{Binding Location}" FontAttributes="Bold"/>
+                                        </Frame>
+
+                                    </VerticalStackLayout>
+                                </Frame>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Frame>
+    </Grid>
 </ContentPage>
+
+

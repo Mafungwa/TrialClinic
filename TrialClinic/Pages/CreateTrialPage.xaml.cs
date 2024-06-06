@@ -34,7 +34,7 @@ public partial class CreateTrialPage : ContentPage
 			TrialPhase = trialPhase,
 			TrialStartDate = TrialStartDatePicker.Date,
 			TrialEndDate = TrialEndDatePicker.Date,
-			LocationId = locationId,
+			LocationId= locationId,
 			TrialDescription = TrialDescriptionEditor.Text
 		};
 
