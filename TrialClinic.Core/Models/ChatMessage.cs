@@ -20,10 +20,12 @@ namespace TrialClinic.Models
         public int RecieverId { get; set;}
 
         public string MessageContent { get; set;}
-
+        public int Forum {  get; set;}
 
         public DateTime DateTime { get; set;}
-        public int UserId { get; internal set; }
+
+        [ForeignKey(nameof(User))]
+        public int UserId { get; set; }
         public DateTime MessageDate { get; set;}
     }
 }

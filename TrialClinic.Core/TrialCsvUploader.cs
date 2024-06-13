@@ -1,54 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Reflection.Metadata.Ecma335;
-using System.Security.Cryptography.X509Certificates;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TinyCsvParser;
-using TinyCsvParser.Tokenizer;
-using TinyCsvParser.Tokenizer.RFC4180;
 using TrialClinic.Core.Models;
 using TrialClinic.Models;
 using TrialClinic.Services;
+using TinyCsvParser;
+using TinyCsvParser.Tokenizer;
 using TrialUploader.Models;
 using TrialUploader.Utilities;
 
-namespace TrialDataUploader
+namespace TrialClinic.Core
 {
-    class Program
+    public class TrialCsvUploader
     {
         private static TrialLocalDatabase _database;
-
-        public Program(TrialLocalDatabase database)
+        public TrialCsvUploader(TrialLocalDatabase database)
         {
             _database = database;
         }
 
-        static async Task Main(string[] args)
+      /*  static async Task Main(string[] args)
         {
             var database = new TrialLocalDatabase(new TranslationService());
-            var program = new Program(database);
-            string csvFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "NCT06050356.csv");
-            await program.UploadData(csvFilePath);
+            var program = new TrialCsvUploader(database);
+            //string csvFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "NCT06050356.csv");
+            //await program.UploadData(csvFilePath);
         }
-
-        public async Task UploadData(string filePath)
+      */
+        public async Task UploadData(Stream csvStream)
         {
-            string csvFilePath = filePath;
-            if (!File.Exists(csvFilePath))
+            if (csvStream == null)
             {
-                Console.WriteLine("CSV file not found at path: " + csvFilePath);
+                Console.WriteLine("No CSV file selected");
                 return;
             }
+            //string csvFilePath = filePath;
+            //if (!File.Exists(csvFilePath))
+            //{
+            //    Console.WriteLine("CSV file not found at path: " + csvFilePath);
+            //    return;
+            //}
 
-            ReadCsvFile(csvFilePath);
+            ReadCsvFile(csvStream);
 
             //ExistingUser();
 
             Console.WriteLine("Data upload complete.");
 
         }
+
         public static string GetDatabasePath()
         {
             string fileName = "Trialdata.db";
@@ -56,7 +58,7 @@ namespace TrialDataUploader
             return Path.Combine(pathToDb, fileName);
         }
 
-        public static List<TrialUpload> ReadCsvFile(string filePath)
+        public static List<TrialUpload> ReadCsvFile(Stream csvStream)
         {
             var trialUpload = new List<TrialUpload>();
             //var users = _database.GetAllUsers();
@@ -70,16 +72,22 @@ namespace TrialDataUploader
 
             var csvMapper = new TrialCsvMapping();
             var csvParser = new CsvParser<TrialUpload>(csvParserOptions, csvMapper);
-
-                var result = csvParser.ReadFromFile(filePath, Encoding.UTF8);
-             foreach (var details in result)
-             {
-                if (details.IsValid)
+            
+            using (var reader = new StreamReader(csvStream))
+            {
+                var csvData = reader.ReadToEnd();
+                var result = csvParser.ReadFromString(new CsvReaderOptions(new[] { Environment.NewLine }), csvData);
+                foreach (var details in result)
                 {
-                    trialUpload.Add(details.Result);
+                    if (details.IsValid)
+                    {
+                        trialUpload.Add(details.Result);
+                    }
                 }
-             }
-        
+            }
+
+            
+
             foreach (var trialUploadItem in trialUpload)
             {
                 var trialPhase = ExtractNumber.GetNumber(trialUploadItem.TrialPhase);
@@ -99,8 +107,6 @@ namespace TrialDataUploader
                     Status = trialUploadItem.Status,
                     TrialEndDate = trialUploadItem.TrialEndDate,
                 };
-
-                ExistingUser();
 
                 var disease = new Disease
                 {
@@ -132,52 +138,44 @@ namespace TrialDataUploader
 
                 trial.LocationId = location.LocationId;
 
-                    //_database.InsertTrial(trial);
-                    
+                //_database.InsertTrial(trial);
 
-                 var treatments = trialUploadItem.Treatment.Split('|');
 
-                 foreach (var treatmentItem in treatments)
-                 {
-                     var treatmentTypeAndName = treatmentItem.Split(':');
-                     var treatmentType = treatmentTypeAndName[0].Trim();
-                     var treatmentName = treatmentTypeAndName[1].Trim();
+                var treatments = trialUploadItem.Treatment.Split('|');
 
-                     var treatment = _database.GetTreatmentByNameAndType(treatmentName, treatmentType);
+                foreach (var treatmentItem in treatments)
+                {
+                    var treatmentTypeAndName = treatmentItem.Split(':');
+                    var treatmentType = treatmentTypeAndName[0].Trim();
+                    var treatmentName = treatmentTypeAndName[1].Trim();
 
-                     if (treatment == null)
-                     {
+                    var treatment = _database.GetTreatmentByNameAndType(treatmentName, treatmentType);
+
+                    if (treatment == null)
+                    {
                         treatment = new Treatment
                         {
                             TreatmentType = treatmentType,
                             TreatmentName = treatmentName,
                         };
                         _database.InsertTreatment(treatment);
-                     }
+                    }
 
-                     var trialTreatment = new TrialTreatment
-                     {
-                         TrialId = trial.TrialId,
-                         TreatmentId = treatment.TreatmentId,
-                     };
-                        _database.InsertTrialTreatment(trialTreatment);
-                 }
+                    var trialTreatment = new TrialTreatment
+                    {
+                        TrialId = trial.TrialId,
+                        TreatmentId = treatment.TreatmentId,
+                    };
+                    _database.InsertTrialTreatment(trialTreatment);
+                }
 
-             //       _database.InsertTrial(trial);
-                 _database.InsertTrialWithTranslations(trial);
+                //       _database.InsertTrial(trial);
+                _database.InsertTrialWithTranslations(trial);
             }
             return trialUpload;
         }
 
-        public static void ExistingUser()
-        {
-            var users = _database.GetAllUsers();
 
-            foreach(var user in users)
-            {
-                _database.InsertUser(user);
-            }
-        }
 
     }
 

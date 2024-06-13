@@ -8,7 +8,6 @@ namespace TrialClinic.Pages;
 public partial class UserPage : ContentPage
 {
     private TrialLocalDatabase _database;
-    private List<UserType> _userTypes;
 
     public bool IsSigningUp { get; private set; }
 

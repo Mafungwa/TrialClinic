@@ -16,9 +16,10 @@ namespace TrialClinic.Models
         public string PhysicalAddress { get; set; }
         public DateTime DateOfBirth { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string Role { get; set; }
 
-        [ForeignKey(nameof(UserType))]
-        public int UserTypeId { get; set; }
+        [ForeignKey(nameof(Recruiter))]
+        public int RecruiterId { get; set; }
 
         [ForeignKey(nameof(Trial))]
         public int TrialId { get; set; }

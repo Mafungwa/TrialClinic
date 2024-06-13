@@ -4,6 +4,7 @@ using Microsoft.Maui.Controls;
 using TrialClinic.Models;
 using TrialClinic.Pages;
 using TrialClinic.Services;
+using TrialClinic.Core.Models;
 
 namespace TrialClinic.Pages;
 
@@ -11,10 +12,12 @@ namespace TrialClinic.Pages;
 public partial class ChatMessagePage : ContentPage
 {
     private TrialLocalDatabase _database;
-    private int _currentTrialId;    
+    public int _currentTrialId;    
     private ChatMessage _message;
 
     public ObservableCollection<ChatMessage> Messages { get; set; }
+
+    
 
     public ChatMessagePage(TrialLocalDatabase database)
     {
@@ -38,17 +41,17 @@ public partial class ChatMessagePage : ContentPage
 
     public async void OnSendButtonClicked(object sender, EventArgs e, ChatMessage message)
     {
-       var _message = new ChatMessage
+       var messages = new ChatMessage
        {
-            ForumId = _currentTrialId,
+            Forum = _currentTrialId,
             UserId = _currentTrialId,
             MessageContent = MessageEntry.Text,
             DateTime = DateTime.Now
         };
 
-        Messages.Add(message);
+        Messages.Add(messages);
         MessageEntry.Text = string.Empty;
-        _database.SaveChatMessage(message);
+        _database.SaveChatMessage(messages);
     }
 
     private void OnNewThreadClicked(object sender, EventArgs e)

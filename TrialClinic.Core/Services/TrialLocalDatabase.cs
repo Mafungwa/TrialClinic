@@ -1,6 +1,8 @@
 ﻿using SQLite;
+using System.Reflection;
 using TrialClinic.Core.Models;
 using TrialClinic.Models;
+using TrialClinic;
 using Location = TrialClinic.Models.Location;
 
 namespace TrialClinic.Services
@@ -9,6 +11,8 @@ namespace TrialClinic.Services
     {
         private SQLiteConnection _dbconnection;
         private TranslationService _translationService;
+
+        //public string DbPath { get; }
 
         public string GetDatabasePath()
         {
@@ -23,11 +27,12 @@ namespace TrialClinic.Services
             _translationService = translationService;
 
 
-            _dbconnection.CreateTable<User>(CreateFlags.AutoIncPK);
-            _dbconnection.CreateTable<UserType>();
+            _dbconnection.CreateTable<User>();
             _dbconnection.CreateTable<Trial>();
             _dbconnection.CreateTable<TrialTranslation>();
             _dbconnection.CreateTable<Models.Location>();
+            _dbconnection.CreateTable<Recruiter>();
+            _dbconnection.CreateTable<Participant>();
             _dbconnection.CreateTable<Treatment>();
             _dbconnection.CreateTable<Disease>();
             _dbconnection.CreateTable<Recruitment>();
@@ -38,21 +43,25 @@ namespace TrialClinic.Services
             _dbconnection.CreateTable<ChatMessage>();
             _dbconnection.CreateTable<PrivateChat>();
             _dbconnection.CreateTable<TrialTreatment>();
-            _dbconnection.CreateTable<Update>();
 
 
             SeedDatabase();
 
         }
 
+        //public TrialLocalDatabase(string dbPath)
+        //{
+        //    DbPath = dbPath;
+        //}
+
         public void SeedDatabase()
         {
-            if (_dbconnection.Table<UserType>().Count() ==0 ) 
+            /*if (_dbconnection.Table<UserType>().Count() ==0 ) 
             {
                 _dbconnection.Insert(new UserType { TypeName = "Participant" });
                 _dbconnection.Insert(new UserType { TypeName = "Recruiter" });
 
-            }
+            }*/
         }
 
         public async Task InsertTrialWithTranslations(Trial trial)
@@ -73,12 +82,32 @@ namespace TrialClinic.Services
                 });
             }
 
-            _dbconnection.InsertAll(translations);
+             _dbconnection.InsertAll(translations);
         }
 
-        public List<Update> GetUpdates()
+        public Trial GetTrialByRecruiterId(int recruiterId)
         {
-            return _dbconnection.Table<Update>().OrderByDescending(u => u.Date).ToList();
+            return _dbconnection.Table<Trial>().FirstOrDefault(t => t.RecruiterId == recruiterId);
+        }
+
+        public List<Disease>GetDiseasesForTrial(int trialId)
+        {
+            return _dbconnection.Table<Disease>().Where(d => d.TrialId == trialId).ToList();
+        }
+
+        public void UpdateTrial(Trial trial)
+        {
+            _dbconnection.Update(trial);
+        }
+
+        public void UpdateDisease(Disease disease)
+        {
+            _dbconnection.Update(disease);
+        }
+
+        public List<Trial> GetAllTrials()
+        {
+            return _dbconnection.Table<Trial>().ToList();
         }
 
         public List<User> GetParticipantsForTrial(int trialId)
@@ -101,11 +130,6 @@ namespace TrialClinic.Services
         {
             return _dbconnection.Table<Trial>().ToList();
         }
-
-        /*public void UpdateTrial(Trial trial)
-        {
-            _dbconnection.Update(trial);
-        }*/
 
         public List<User> GetParticipants()
         {
@@ -134,13 +158,14 @@ namespace TrialClinic.Services
                        .FirstOrDefault();
         }
 
-        public List<UserType> GetUserTypes()
-        {
-            return _dbconnection.Table<UserType>().ToList();
-        }
         public void InsertUser(User user)
         {
             _dbconnection.Insert(user);
+        }
+
+        public void InsertDisease(Disease disease)
+        {
+            _dbconnection.Insert(disease);
         }
 
         public void DeleteUser(User user)
@@ -153,9 +178,19 @@ namespace TrialClinic.Services
 
             return location.LocationId;
         }
+
         public Location GetLocationById(int id)
         {
             return _dbconnection.Table<Location>().Where(x => x.LocationId == id).FirstOrDefault();
+        }
+
+        public List<User> GetAllUsers()
+        {
+            return _dbconnection.Table<User>().ToList();
+        }
+        public User GetUserById(int Id)
+        {
+            return _dbconnection.Table<User>().Where(x => x.UserId == Id).FirstOrDefault();
         }
 
         public Location GetLocationByAll(string streetAddress, string city, string province, string postalCode,  string country)
@@ -168,10 +203,10 @@ namespace TrialClinic.Services
             return _dbconnection.Table<Treatment>().FirstOrDefault(t => t.TreatmentName == treatmentName && t.TreatmentType == treatmentType);
         }
 
-        public List<Location> GetAllLocations()
+        /*public List<Location> GetAllLocations()
         {
             return _dbconnection.Table<Location>().ToList();
-        }
+        }*/
 
         public Trial GetTrialById(int id)
         {
@@ -227,12 +262,12 @@ namespace TrialClinic.Services
             return _dbconnection.Table<RecruitmentStatus>().FirstOrDefault(rs => rs.RecruitmentStatusId == id);
         }
 
-        internal IEnumerable<ChatMessage> GetMessagesByForum(int currentTrialId)
+        public IEnumerable<ChatMessage> GetMessagesByForum(int currentTrialId)
         {
             throw new NotImplementedException();
         }
 
-        internal void SaveChatMessage(ChatMessage message)
+        public void SaveChatMessage(ChatMessage message)
         {
             throw new NotImplementedException();
         }

@@ -16,10 +16,7 @@ namespace TrialClinic.Core.Models
         [PrimaryKey, AutoIncrement]
 
         public int DiseaseId { get; set; }
-
         public string Condition { get; set; }
-
-        public DateTime ResultsEndDate { get; set; }
 
         [ForeignKey(nameof(Trial))]
 
