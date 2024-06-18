@@ -42,7 +42,7 @@ namespace TrialDataUploader
                 return;
             }
 
-            ReadCsvFile(csvFilePath);
+            await ReadCsvFile(csvFilePath);
 
             //ExistingUser();
 
@@ -56,7 +56,7 @@ namespace TrialDataUploader
             return Path.Combine(pathToDb, fileName);
         }
 
-        public static List<TrialUpload> ReadCsvFile(string filePath)
+        public static async Task<List<TrialUpload>> ReadCsvFile(string filePath)
         {
             var trialUpload = new List<TrialUpload>();
             //var users = _database.GetAllUsers();
@@ -164,7 +164,7 @@ namespace TrialDataUploader
                  }
 
              //       _database.InsertTrial(trial);
-                 _database.InsertTrialWithTranslations(trial);
+                 await _database.InsertTrialWithTranslations(trial);
             }
             return trialUpload;
         }

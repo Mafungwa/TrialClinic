@@ -4,6 +4,7 @@ using TrialClinic.Core.Models;
 using TrialClinic.Models;
 using TrialClinic;
 using Location = TrialClinic.Models.Location;
+using SQLiteNetExtensions.Extensions;
 
 namespace TrialClinic.Services
 {
@@ -45,7 +46,7 @@ namespace TrialClinic.Services
             _dbconnection.CreateTable<TrialTreatment>();
 
 
-            SeedDatabase();
+          //  SeedDatabase();
 
         }
 
@@ -54,14 +55,13 @@ namespace TrialClinic.Services
         //    DbPath = dbPath;
         //}
 
-        public void SeedDatabase()
+        public async Task SeedDatabase()
         {
-            /*if (_dbconnection.Table<UserType>().Count() ==0 ) 
+            if (_dbconnection.Table<TrialTranslation>().Count() == 0)
             {
-                _dbconnection.Insert(new UserType { TypeName = "Participant" });
-                _dbconnection.Insert(new UserType { TypeName = "Recruiter" });
-
-            }*/
+                var trial = new Trial { /* populate trial details */ };
+                await InsertTrialWithTranslations(trial);
+            }
         }
 
         public async Task InsertTrialWithTranslations(Trial trial)
@@ -82,8 +82,17 @@ namespace TrialClinic.Services
                 });
             }
 
-             _dbconnection.InsertAll(translations);
+            _dbconnection.InsertAll(translations);
         }
+
+        public async Task InsertAndTestTrialWithTranslations(Trial trial)
+        {
+            await InsertTrialWithTranslations(trial);
+
+            var translations = GetTranslationsForTrial(trial.TrialId);
+            Console.WriteLine($"After insertion, loaded {translations.Count} translations for trial {trial.TrialId}");
+        }
+
 
         public Trial GetTrialByRecruiterId(int recruiterId)
         {
@@ -210,8 +219,28 @@ namespace TrialClinic.Services
 
         public Trial GetTrialById(int id)
         {
-            return _dbconnection.Table<Trial>().Where(x =>x.TrialId == id).FirstOrDefault();
+            var trial = _dbconnection.Table<Trial>().Where(x => x.TrialId == id).FirstOrDefault();
+
+            _dbconnection.GetChildren<Trial>(trial, true);
+
+            return trial;
         }
+
+        public TrialTreatment GetTrialTreatmentById(int trialId)
+        {
+            var trialTreatment = _dbconnection.Table<TrialTreatment>().Where(x => x.TrialId == trialId).FirstOrDefault();
+
+            var trialTreatments = _dbconnection.Table<TrialTreatment>().ToList();
+
+
+
+            if (trialTreatment != null)
+                _dbconnection.GetChildren<TrialTreatment>(trialTreatment, true);
+   
+            return trialTreatment;
+        }
+
+
 
         public void InsertTrial(Trial trial)
         {

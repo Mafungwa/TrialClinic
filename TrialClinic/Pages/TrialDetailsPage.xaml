@@ -4,42 +4,46 @@
              x:Class="TrialClinic.Pages.TrialDetailsPage"
              Title="Trial Details">
     <ScrollView>
-        <StackLayout>
+        <StackLayout Padding="10">
             <!-- Trial details -->
-            <Label Text="Trial Name" />
-            <Label Text="{Binding Trial.TrialName}" />
+            <Label Text="Trial Name" FontAttributes="Bold" />
+            <Label Text="{Binding TrialTreatment.Trial.TrialName}" />
 
-            <Label Text="Trial Phase" />
-            <Label Text="{Binding Trial.TrialPhase}" />
+            <Label Text="Trial Phase" FontAttributes="Bold" />
+            <Label Text="{Binding TrialTreatment.Trial.TrialPhase}" />
 
-            <Label Text="Trial Start Date" />
-            <Label Text="{Binding Trial.TrialStartDate}" />
+            <Label Text="Trial Start Date" FontAttributes="Bold" />
+            <Label Text="{Binding TrialTreatment.Trial.TrialStartDate}" />
 
-            <Label Text="Trial End Date" />
-            <Label Text="{Binding Trial.TrialEndDate}" />
+            <Label Text="Trial End Date" FontAttributes="Bold" />
+            <Label Text="{Binding TrialTreatment.Trial.TrialEndDate}" />
 
-            <Label Text="Trial Description" />
-            <Label Text="{Binding Trial.TrialDescription}" />
+            <Label Text="Trial Description" FontAttributes="Bold" />
+            <Label Text="{Binding TrialTreatment.Trial.TrialDescription}" />
 
             <!-- Location details -->
-            <Label Text="Location" />
-            <Label Text="{Binding Location.StreetAddress}" />
-            <Label Text="{Binding Location.City}" />
-            <Label Text="{Binding Location.Town}" />
-            <Label Text="{Binding Location.PostalCode}" />
+            <Label Text="Location" FontAttributes="Bold" />
+            <Label Text="{Binding TrialTreatment.Trial.Location.StreetAddress}" />
+            <Label Text="{Binding TrialTreatment.Trial.Location.City}" />
+            <Label Text="{Binding TrialTreatment.Trial.Location.Town}" />
+            <Label Text="{Binding TrialTreatment.Trial.Location.PostalCode}" />
+
+            <!-- Disease details -->
+            <Label Text="Disease Condition" FontAttributes="Bold" />
+            <Label Text="{Binding TrialTreatment.Trial.Disease.Condition}" />
 
             <!-- Treatment details -->
-            <Label Text="Treatments" />
-            <ListView ItemsSource="{Binding Treatments}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Padding="10">
-                            <Label Text="{Binding TreatmentName}" />
-                            <Label Text="{Binding TreatmentDescription}" />
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <Label Text="Treatment" FontAttributes="Bold" />
+            <Label Text="{Binding TrialTreatment.Treatment.TreatmentName}" FontAttributes="Bold" />
+            <Label Text="{Binding TrialTreatment.Treatment.TreatmentDescription}" />
+
+            <!--<Label x:Name="TrialDescriptionLabel"
+               Text="Trial description will appear here."
+               FontSize="Medium"
+               TextColor="Black"
+               Padding="10" />
+
+            <Button Text="Choose Language" Clicked="OnChooseLanguageClicked" />-->
         </StackLayout>
     </ScrollView>
 </ContentPage>

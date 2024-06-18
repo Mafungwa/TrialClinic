@@ -51,5 +51,9 @@ public partial class UserPage : ContentPage
 
         _database.InsertUser(newUser);
         await DisplayAlert("Success", "User created successfully!", "OK");
+
+       await Shell.Current.GoToAsync("signinpage");
+
+        //await Navigation.PushAsync(new SignInPage(_database));
     }
 }

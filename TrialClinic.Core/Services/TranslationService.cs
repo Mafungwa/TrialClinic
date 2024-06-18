@@ -17,20 +17,30 @@ namespace TrialClinic.Services
 
         public async Task<string> TranslateText(string inputText, string targetLanguage)
         {
-            string route = $"/translate?api-version=3.0&to={targetLanguage}";
-            object[] body = new object[] { new { Text = inputText } };
-            var requestBody = new StringContent(System.Text.Json.JsonSerializer.Serialize(body));
-            requestBody.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-            using (HttpClient client = new HttpClient())
+            try
             {
-                client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
-                client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Region", "eastus"); // e.g., "global"
-                var response = await client.PostAsync(endpoint + route, requestBody);
-                string result = await response.Content.ReadAsStringAsync();
-                JArray jsonResponse = JArray.Parse(result);
-                return jsonResponse[0]["translations"][0]["text"].ToString();
+                string route = $"/translate?api-version=3.0&to={targetLanguage}";
+                object[] body = new object[] { new { Text = inputText } };
+                var requestBody = new StringContent(System.Text.Json.JsonSerializer.Serialize(body));
+                requestBody.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                using (HttpClient client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
+                    client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Region", "eastus"); // e.g., "global"
+                    var response = await client.PostAsync(endpoint + route, requestBody);
+                    string result = await response.Content.ReadAsStringAsync();
+                    JArray jsonResponse = JArray.Parse(result);
+                    return jsonResponse[0]["translations"][0]["text"].ToString();
+                }
             }
+            catch(Exception ex) 
+            {
+
+
+            }
+
+            return null;
         }
     }
 }

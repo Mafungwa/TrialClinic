@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SQLite;
+using SQLiteNetExtensions.Attributes;
 
 namespace TrialClinic.Models
 {
@@ -14,13 +14,19 @@ namespace TrialClinic.Models
 
         public int TrialTreatmentId { get; set; }
 
-        [ForeignKey(nameof(Trial))]
+        [ForeignKey(typeof(Trial))]
 
         public int TrialId { get; set; }
 
-        [ForeignKey(nameof(Treatment))]
+        [ManyToOne]
+        public Trial? Trial { get; set; }
+
+        [ForeignKey(typeof(Treatment))]
 
         public int TreatmentId { get; set; }
+
+        [ManyToOne]
+        public Treatment? Treatment { get; set; }
 
     }
 }

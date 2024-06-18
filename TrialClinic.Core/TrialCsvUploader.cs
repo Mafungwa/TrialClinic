@@ -16,19 +16,21 @@ namespace TrialClinic.Core
     public class TrialCsvUploader
     {
         private static TrialLocalDatabase _database;
+
         public TrialCsvUploader(TrialLocalDatabase database)
         {
             _database = database;
+            
         }
 
-      /*  static async Task Main(string[] args)
-        {
-            var database = new TrialLocalDatabase(new TranslationService());
-            var program = new TrialCsvUploader(database);
-            //string csvFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "NCT06050356.csv");
-            //await program.UploadData(csvFilePath);
-        }
-      */
+        /*  static async Task Main(string[] args)
+          {
+              var database = new TrialLocalDatabase(new TranslationService());
+              var program = new TrialCsvUploader(database);
+              //string csvFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "NCT06050356.csv");
+              //await program.UploadData(csvFilePath);
+          }
+        */
         public async Task UploadData(Stream csvStream)
         {
             if (csvStream == null)
@@ -106,6 +108,7 @@ namespace TrialClinic.Core
                     TrialStartDate = trialUploadItem.TrialStartDate,
                     Status = trialUploadItem.Status,
                     TrialEndDate = trialUploadItem.TrialEndDate,
+                    //RecruiterId = _recruiterId,
                 };
 
                 var disease = new Disease
@@ -139,6 +142,7 @@ namespace TrialClinic.Core
                 trial.LocationId = location.LocationId;
 
                 //_database.InsertTrial(trial);
+                _database.InsertTrialWithTranslations(trial);
 
 
                 var treatments = trialUploadItem.Treatment.Split('|');
@@ -170,7 +174,7 @@ namespace TrialClinic.Core
                 }
 
                 //       _database.InsertTrial(trial);
-                _database.InsertTrialWithTranslations(trial);
+//                _database.InsertTrialWithTranslations(trial);
             }
             return trialUpload;
         }

@@ -11,103 +11,46 @@ namespace TrialClinic.Pages
     public partial class TrialsListPage : ContentPage
     {
         private TrialLocalDatabase _database;
-
         private ObservableCollection<Trial> _trials;
 
         public ObservableCollection<Trial> Trials
         {
             get { return _trials; }
-            set { _trials = value;
-
-                OnPropertyChanged();
+            set
+            {
+                _trials = value;
+                OnPropertyChanged(nameof(Trials)); // Notify the UI that the Trials property has changed.
             }
         }
-
 
         public TrialsListPage(TrialLocalDatabase database)
         {
             InitializeComponent();
             _database = database;
+            Trials = new ObservableCollection<Trial>(); // Initialize the Trials collection.
             LoadTrials();
-
-            BindingContext = this;
+            BindingContext = this; // Set the BindingContext to enable data binding in XAML.
         }
 
         private void LoadTrials()
         {
-            //var trials = _database.GetAllTrials();
-            var trials = GenerateTestTrials();
-
-            Trials = new ObservableCollection<Trial>(trials);
-
-        }
-
-        private List<Trial> GenerateTestTrials()
-        {
-
-            var trials = new List<Trial>();
-
-            var trial = new Trial();
-            trial.TrialName = "Trial 1";
-            trial.TrialStartDate = DateTime.Now;
-            trial.TrialEndDate = DateTime.Now.AddDays(30);
-            trial.TrialPhase = 1;
-            trial.Status = "Active";
-            trial.ParticipantCount = 10;
-            trial.Location = "Location, UWC Street 1, Cape Town, 4456";
-            trial.TrialDescription = "Cancer";
-
-            trials.Add(trial);
-
-            trial = new Trial();
-            trial.TrialName = "Trial 2";
-            trial.TrialStartDate = DateTime.Now;
-            trial.TrialEndDate = DateTime.Now.AddDays(30);
-            trial.TrialPhase = 1;
-            trial.Status = "Active";
-            trial.ParticipantCount = 10;
-
-
-            trials.Add(trial);
-
-            trial = new Trial();
-            trial.TrialName = "Trial 3";
-            trial.TrialStartDate = DateTime.Now;
-            trial.TrialEndDate = DateTime.Now.AddDays(30);
-            trial.TrialPhase = 1;
-            trial.Status = "Inactive";
-            trial.ParticipantCount = 0;
-
-
-
-            trials.Add(trial);
-
-            trial = new Trial();
-            trial.TrialName = "Trial 4";
-            trial.TrialStartDate = DateTime.Now;
-            trial.TrialEndDate = DateTime.Now.AddDays(30);
-            trial.TrialPhase = 1;
-            trial.Status = "Active";
-            trial.ParticipantCount = 10;
-
-
-
-            trials.Add(trial);
-
-            return trials;
+            // Assuming _database.GetAllTrials() fetches the trials from the database.
+            var trialsFromDb = _database.GetAllTrials();
+            foreach (var trial in trialsFromDb)
+            {
+                Trials.Add(trial); // Add each trial to the Trials collection.
+            }
         }
 
         private async void OnTrialSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem is Trial selectedTrial)
             {
-                await Shell.Current.GoToAsync($"trialdetailspage?trialId={selectedTrial.TrialId}");
+                var param = new ShellNavigationQueryParameters();
+                param["Trial"] = selectedTrial;
+
+                await Shell.Current.GoToAsync($"trialdetailspage",param);
             }
-        }
-
-        private void Frame_LayoutChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -1,10 +1,5 @@
 ﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SQLiteNetExtensions.Attributes;
 using TrialClinic.Core.Models;
 
 namespace TrialClinic.Models
@@ -22,18 +17,29 @@ namespace TrialClinic.Models
         public DateTime TrialStartDate { get; set; }
         public DateTime TrialEndDate { get; set; }
 
-        [ForeignKey(nameof(Location))]
+        [ForeignKey(typeof(Location))]
         public int LocationId { get; set; }
 
-        [ForeignKey(nameof (Disease))]
+        [ManyToOne]
+        public Location? Location { get; set; }
+
+
+        [ForeignKey(typeof (Disease))]
         public int DiseaseId { get; set; }
+
+        [ManyToOne]
+        public Disease? Disease { get; set; }
         public string Status { get; set; }
         public string? TrialDescription { get; set; }
 
         [Ignore] // This tells SQLite to not store this property in the database
         public int ParticipantCount { get; set; }
 
-        [ForeignKey(nameof(Recruiter))]
+        [ForeignKey(typeof(Recruiter))]
         public int RecruiterId { get; set; }
+
+        [ManyToOne]
+
+        public Recruiter? Recruiter { get; set; }
     }
 }

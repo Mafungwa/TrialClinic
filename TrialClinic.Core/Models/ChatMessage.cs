@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using SQLite;
+﻿using SQLite;
+using SQLiteNetExtensions.Attributes;
 
 namespace TrialClinic.Models
 {
@@ -11,11 +11,11 @@ namespace TrialClinic.Models
 
         public int MessageId { get; set; }
 
-        [ForeignKey(nameof(User))]
+        [ForeignKey(typeof(User))]
 
         public int SenderId { get; set;}
 
-        [ForeignKey(nameof(User))]
+        [ForeignKey(typeof(User))]
 
         public int RecieverId { get; set;}
 
@@ -24,7 +24,7 @@ namespace TrialClinic.Models
 
         public DateTime DateTime { get; set;}
 
-        [ForeignKey(nameof(User))]
+        [ForeignKey(typeof(User))]
         public int UserId { get; set; }
         public DateTime MessageDate { get; set;}
     }

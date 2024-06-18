@@ -2,49 +2,21 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TrialClinic.Pages.CreateTrialPage"
-             Background="#139">
-
-
-    <VerticalStackLayout Padding="30" Spacing="20">
-
-        <Frame HasShadow="False" HeightRequest="700" CornerRadius="30" Padding="20" BorderColor="White" BackgroundColor="White">
-            <Grid RowSpacing="-110">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Label Text="CREATE TRIAL" Margin="10,10,160,0" FontAttributes="Bold" FontSize="30" TextColor="#139" HorizontalOptions="Center" />
-
-                <Frame Grid.Row="1" HeightRequest="60" HasShadow="True" CornerRadius="20" Padding="20,10" BorderColor="#007bff">
-                    <Entry x:Name="TrialNameEntry" Placeholder="Trial Name" />
-                </Frame>
-
-                <Frame Grid.Row="2" HeightRequest="60" HasShadow="True" CornerRadius="20" Padding="20,10" BorderColor="#007bff">
-                    <Entry x:Name="TrialPhaseEntry" Placeholder="Trial Phase" />
-                </Frame>
-
-                <Frame Grid.Row="3" HeightRequest="60" HasShadow="True" CornerRadius="20" Padding="20,10" BorderColor="#007bff">
-                    <DatePicker x:Name="TrialStartDatePicker" />
-                </Frame>
-                <Frame Grid.Row="4" HeightRequest="60" HasShadow="True" CornerRadius="20" Padding="20,10" BorderColor="#007bff">
-                    <DatePicker x:Name="TrialEndDatePicker" />
-                </Frame>
-                <Frame Grid.Row="5" HeightRequest="60" HasShadow="True" CornerRadius="20" Padding="20,10" BorderColor="#007bff">
-                    <Entry x:Name="LocationIdEntry" Placeholder="Location ID" />
-                </Frame>
-                <Frame Grid.Row="6" HeightRequest="60" HasShadow="True" CornerRadius="20" Padding="20,10" BorderColor="#007bff">
-                    <Editor x:Name="TrialDescriptionEditor" Placeholder="Trial Description" />
-                </Frame>
-                <Button Grid.Row="7" HeightRequest="40" Text="Create Trial" Clicked="OnCreateTrialButtonClicked" 
-                         BackgroundColor="#007bff" TextColor="White"
-                         Padding="10,5" WidthRequest="150" FontSize="16" CornerRadius="25"/>
-            </Grid>
-        </Frame>
+             Title="CreateTrialPage">
+    <VerticalStackLayout>
+        <Entry x:Name="NCTNumberEntry" Placeholder="NCT Number" />
+        <Entry x:Name="TrialNameEntry" Placeholder="Trial Name" />
+        <Entry x:Name="URLWebViewSourceEntry" Placeholder="URL" />
+        <Entry x:Name="TrialPhaseEntry" Placeholder="Trial Phase" />
+        <Entry x:Name="SexEntry" Placeholder="Sex" />
+        <Entry x:Name="AgeEntry" Placeholder="Age" />
+        <DatePicker x:Name="TrialStartDatePicker" />
+        <DatePicker x:Name="TrialEndDatePicker" />
+        <Entry x:Name="LocationIdEntry" Placeholder="Location ID" />
+        <Entry x:Name="DiseaseIdEntry" Placeholder="Disease ID" />
+        <Entry x:Name="TrialDescriptionEditor" Placeholder="Trial Description" />
+        <Entry x:Name="Status" Placeholder="Status"/>
+        <Button Text="Create Trial" Clicked="OnCreateTrialButtonClicked" />
+        <Button Text="Select CSV" Clicked="OnSelectCsvButton"/>
     </VerticalStackLayout>
 </ContentPage>
