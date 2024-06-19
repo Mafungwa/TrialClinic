@@ -33,7 +33,7 @@ public partial class PrivateChatPage : ContentPage
 		SecreteChats.Add(messageChat);
         MessageEntry.Text = string.Empty;
 
-		_database.SaveChatMessage(messageChat);
+		//_database.SaveChatMessage(messageChat);
 	}
 
     protected override void OnAppearing()
