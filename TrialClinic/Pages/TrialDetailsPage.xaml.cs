@@ -1,169 +1,86 @@
 using TrialClinic.Models;
 using TrialClinic.Services;
-using Location = TrialClinic.Models.Location;
+using Microsoft.Maui.Controls;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace TrialClinic.Pages;
-
-
-[QueryProperty(nameof(Trial),"Trial")]
-public partial class TrialDetailsPage : ContentPage
+namespace TrialClinic.Pages
 {
-    private TrialLocalDatabase _database;
-    private Trial _trial;
-    //private Location _location;
-    //private List<Treatment> _treatments;
-    private TrialTreatment _trialtreatment;
-    //private List<TrialTranslation> _translations;
-    //private int _trialId;
-
-    public Trial Trial
+    [QueryProperty(nameof(Trial), "Trial")]
+    [QueryProperty(nameof(TrialTreatment), "TrialTreatment")]
+    public partial class TrialDetailsPage : ContentPage
     {
-        get { return _trial; }
-        set { _trial = value; }
-    }
-
-    public TrialTreatment TrialTreatment
-    {
-        get { return _trialtreatment; }
-        set { _trialtreatment = value;
-
-            OnPropertyChanged();
-        }
-    }
-
-
-    public TrialDetailsPage(TrialLocalDatabase database)
-    {
-        InitializeComponent();
-        _database = database;
-        //_translations = new List<TrialTranslation>();
-        BindingContext = this;
-    }
-
-    /*public int TrialId
-    {
-        get { return _trialId; }
-        set
+        private Trial _trial;
+        private TrialTreatment _trialTreatment;
+        private readonly TrialLocalDatabase _database;
+        private Dictionary<string, string> _languageCodes = new Dictionary<string, string>
         {
-            _trialId = value;
-            //LoadTrialDetails(); // Reload trial details whenever TrialId changes
-        }
-    }*/
-
-    /*private async void InitializeTrialData()
-    {
-        var trial = new Trial
-        {
-            TrialId = 1, // Ensure this ID is unique and not conflicting
-            TrialDescription = "This is a test trial description for testing purposes.",
-            TrialName = "Test Trial",
-            TrialStartDate = DateTime.Now,
-            TrialEndDate = DateTime.Now.AddMonths(6),
-            RecruiterId = 1, // Replace with an appropriate recruiter ID
-            LocationId = 1, // Replace with an appropriate location ID
-            Status = "Active",
-            //EligibilityCriteria = "Must be 18 years or older. Must not have any chronic illnesses.",
-            TrialPhase = 1,
+            { "Xhosa", "xh" },
+            { "Zulu", "zu" },
+            { "Afrikaans", "af" }
         };
 
-        await _database.InsertAndTestTrialWithTranslations(trial);
-
-        var translations = _database.GetTranslationsForTrial(trial.TrialId);
-        Console.WriteLine($"After insertion, loaded {translations.Count} translations for trial {trial.TrialId}");
-    }*/
-
-    /*private void LoadTrialDetails()
-    {
-        var trial = _database.GetTrialById(TrialId);
-        if (trial != null)
+        public Trial Trial
         {
-            TrialTreatment = _database.GetTrialTreatmentById(trial.TrialId);
-            _translations = _database.GetTranslationsForTrial(trial.TrialId);
-
-            Console.WriteLine($"Loaded {_translations.Count} translations for trial {trial.TrialId}");
-            foreach (var translation in _translations)
+            get => _trial;
+            set
             {
-                Console.WriteLine($"Language: {translation.LanguageCode}, Description: {translation.TranslatedDescription}");
-            }
-
-            UpdateDisplayedLanguage("en"); // Initially display English description
-        }
-    }*/
-
-    /*private void UpdateDisplayedLanguage()
-    {
-        if (languageCode == "en")
-        {
-            // Display the original English description
-            var trial = _database.GetTrialById(TrialId);
-            TrialDescriptionLabel.Text = trial.Description;
-        }
-        else
-        {
-            var translation = _translations.FirstOrDefault(t => t.LanguageCode == languageCode);
-            if (translation != null)
-            {
-                // Update UI elements with translated content
-                TrialDescriptionLabel.Text = translation.TranslatedDescription;
-            }
-            else
-            {
-                // Handle case when translation for selected language is not found
-                TrialDescriptionLabel.Text = "Translation not available for selected language.";
+                _trial = value;
+                OnPropertyChanged();
             }
         }
-    }*/
 
-    /*private async void OnChooseLanguageClicked(object sender, EventArgs e)
-    {
-        var selectedLanguage = await DisplayActionSheet("Select Language", "Cancel", null, "Xhosa", "Zulu", "Afrikaans");
-
-        switch (selectedLanguage)
+        public TrialTreatment TrialTreatment
         {
-            case "Xhosa":
-                UpdateDisplayedLanguage("xh");
-                break;
-            case "Zulu":
-                UpdateDisplayedLanguage("zu");
-                break;
-            case "Afrikaans":
-                UpdateDisplayedLanguage("af");
-                break;
-            default:
-                // Handle default case or Cancel option
-                UpdateDisplayedLanguage("en"); // Default back to English
-                break;
-        }
-    }*/
-
-    /*private void UpdateDisplayedLanguage(string languageCode)
-    {
-        if (languageCode == "en")
-        {
-            // Display the original English description
-            var trial = _database.GetTrialById(TrialId);
-            TrialDescriptionLabel.Text = trial.TrialDescription;
-        }
-        else
-        {
-            var translation = _translations.FirstOrDefault(t => t.LanguageCode == languageCode);
-            if (translation != null)
+            get => _trialTreatment;
+            set
             {
-                // Update UI elements with translated content
-                TrialDescriptionLabel.Text = translation.TranslatedDescription;
+                _trialTreatment = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public TrialDetailsPage(TrialLocalDatabase database)
+        {
+            InitializeComponent();
+            _database = database;
+            BindingContext = this;
+        }
+
+        private void OnTranslateButtonClicked(object sender, EventArgs e)
+        {
+            TranslateButton.IsVisible = false;
+            LanguageSelectionLayout.IsVisible = true;
+        }
+
+        private async void OnTranslateConfirmButtonClicked(object sender, EventArgs e)
+        {
+            if (_trial == null) return;
+
+            var selectedLanguage = LanguagePicker.SelectedItem?.ToString();
+            if (string.IsNullOrEmpty(selectedLanguage) || !_languageCodes.ContainsKey(selectedLanguage))
+            {
+                await DisplayAlert("Error", "Please select a valid language", "OK");
+                return;
+            }
+
+            string targetLanguageCode = _languageCodes[selectedLanguage];
+            var translationService = new TranslationService();
+            string translatedDescription = await translationService.TranslateText(_trial.TrialDescription, targetLanguageCode);
+
+            if (!string.IsNullOrEmpty(translatedDescription))
+            {
+                DescriptionLabel.Text = translatedDescription;
+                TranslatedDescriptionLabel.Text = $"Translated to {selectedLanguage}";
             }
             else
             {
-                // Handle case when translation for selected language is not found
-                TrialDescriptionLabel.Text = "Translation not available for selected language.";
+                await DisplayAlert("Error", "Translation failed", "OK");
             }
+
+            TranslateButton.IsVisible = true;
+            LanguageSelectionLayout.IsVisible = false;
         }
-    }*/
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        TrialTreatment = _database.GetTrialTreatmentById(Trial.TrialId);
     }
 }
