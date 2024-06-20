@@ -3,24 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TrialClinic.Pages.Disclaimer"
              BackgroundImageSource="bluebackground.png" BackgroundColor="#80000000">
-           <Grid>
-           
+    <Grid>
         <Frame 
-         CornerRadius="30"
-         HeightRequest="500"
-         WidthRequest="350"
-         VerticalOptions="Center"
-         HorizontalOptions="FillAndExpand"
-         Margin="0,-200,0,0"/>
+                 CornerRadius="30"
+                 HeightRequest="500"
+                 WidthRequest="350"
+                 VerticalOptions="Center"
+                 HorizontalOptions="FillAndExpand"
+                 Margin="0,-200,0,0">
+            <ScrollView>
+                <Grid>
+                    <Label Text="DISCLAIMER"
+                         FontSize="40"
+                         FontAttributes="Bold"
+                         HorizontalOptions="CenterAndExpand"
+                         VerticalOptions="StartAndExpand"
+                         Margin="0,0,0,0"
+                         TextColor="Red"/>
 
-        <Label Text="DISCLAIMER"
-    
-         FontSize="30"
-         FontAttributes="Bold"
-         HorizontalOptions="CenterAndExpand"
-         VerticalOptions="StartAndExpand"
-         Margin="0,20,0,0"
-         TextColor="Red"/>
+                    <Label Text="Clinical Bridge is designed to facilitate access to clinical trial information and streamline the enrollment process for potential participants. While we strive to provide accurate and up-to-date information, the content within this application is for informational purposes only and does not constitute medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health providers with any questions regarding a medical condition. We endeavor to keep the information current and accurate, but clinical trials are subject to change, and we cannot guarantee the completeness or timeliness of the data. Listing a clinical trial on the Clinical Bridge does not guarantee eligibility or acceptance, as each trial has specific inclusion and exclusion criteria. The application may contain links to third-party websites or resources, which we do not endorse and are not responsible for the accuracy or reliability of any information, data, opinions, advice, or statements made on these sites. Users are responsible for verifying the information provided and should contact clinical trial sponsors or healthcare providers to confirm details and suitability. The creators and operators of the Clinical Bridge disclaim any liability for direct, indirect, incidental, or consequential damages arising from the use or inability to use the application, including any errors or omissions in the information provided. By using the [Application Name], you acknowledge that you have read, understood, and agreed to this disclaimer. If you do not agree with any part of this disclaimer, you should not use the application"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="Fill"
+                           Margin="0,60,0,0"
+                           LineBreakMode="WordWrap"
+                           FontSize="16">
+                    </Label>
+                </Grid>
+            </ScrollView>
+        </Frame>
 
         <ImageButton Source="sign_in.png" 
               HorizontalOptions="Center"
@@ -30,7 +40,7 @@
               Clicked="ImageButton_SignInClicked"  
               Aspect="AspectFill" Margin="0,0,8,120">
         </ImageButton>
-    
+
         <ImageButton Source="sign_up.png" 
               HorizontalOptions="Center"
               VerticalOptions="EndAndExpand"
@@ -39,7 +49,6 @@
               Clicked="ImageButton_SignUpClicked"  
               Aspect="AspectFill" Margin="0,0,8,50">
 
-            </ImageButton>
-            
-        </Grid>
+        </ImageButton>
+    </Grid>
 </ContentPage>

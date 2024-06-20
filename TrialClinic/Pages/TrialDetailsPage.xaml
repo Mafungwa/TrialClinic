@@ -2,58 +2,60 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TrialClinic.Pages.TrialDetailsPage"
-             Title="Trial Details">
-    <ScrollView>
-        <StackLayout Padding="10">
-            <!-- Trial details -->
-            <Label Text="Trial Name" FontAttributes="Bold" />
-            <Label Text="{Binding Trial.TrialName}" />
+             BackgroundColor="#139" >
 
-            <Label Text="Trial Phase" FontAttributes="Bold" />
-            <Label Text="{Binding Trial.TrialPhase}" />
 
-            <Label Text="Trial Start Date" FontAttributes="Bold" />
-            <Label Text="{Binding Trial.TrialStartDate}" />
+    <Grid>
+        <Frame  CornerRadius="30"
+                    HeightRequest="600"
+                    WidthRequest="350"
+                    VerticalOptions="Center"
+                    HorizontalOptions="FillAndExpand"
+                    Margin="0,-90,0,0">
+            <ScrollView>
+                <Grid>
+                    <StackLayout Padding="10">
+                        <!-- Trial details -->
+                        <Label Text="TRIAL NAME" FontAttributes="Bold" />
+                        <Label Text="{Binding TrialTreatment.Trial.TrialName}" />
 
-            <Label Text="Trial End Date" FontAttributes="Bold" />
-            <Label Text="{Binding Trial.TrialEndDate}" />
+                        <Label Text="TRIAL PHASE" FontAttributes="Bold" />
+                        <Label Text="{Binding TrialTreatment.Trial.TrialPhase}" />
 
-            <Label Text="Trial Description" FontAttributes="Bold" />
-            <Label x:Name="DescriptionLabel" Text="{Binding Trial.TrialDescription}" />
+                        <Label Text="START DATE" FontAttributes="Bold" />
+                        <Label Text="{Binding TrialTreatment.Trial.TrialStartDate}" />
 
-            <!-- Location details -->
-            <Label Text="Location" FontAttributes="Bold" />
-            <Label Text="{Binding Trial.Location.StreetAddress}" />
-            <Label Text="{Binding Trial.Location.City}" />
-            <Label Text="{Binding Trial.Location.Town}" />
-            <Label Text="{Binding Trial.Location.PostalCode}" />
+                        <Label Text="END DATE" FontAttributes="Bold" />
+                        <Label Text="{Binding TrialTreatment.Trial.TrialEndDate}" />
 
-            <!-- Disease details -->
-            <Label Text="Disease Condition" FontAttributes="Bold" />
-            <Label Text="{Binding Trial.Disease.Condition}" />
+                        <Label Text="DESCRIPTION" FontAttributes="Bold" />
+                        <Label Text="{Binding TrialTreatment.Trial.TrialDescription}" />
 
-            <!-- Treatment details -->
-            <Label Text="Treatment" FontAttributes="Bold" />
-            <Label Text="{Binding TrialTreatment.Treatment.TreatmentName}" FontAttributes="Bold" />
-            <Label Text="{Binding TrialTreatment.Treatment.TreatmentDescription}" />
+                        <!-- Location details -->
+                        <Label Text="LOCATION" FontAttributes="Bold" />
+                        <Label Text="{Binding TrialTreatment.Trial.Location.StreetAddress}" />
+                        <Label Text="{Binding TrialTreatment.Trial.Location.City}" />
+                        <Label Text="{Binding TrialTreatment.Trial.Location.Town}" />
+                        <Label Text="{Binding TrialTreatment.Trial.Location.PostalCode}" />
 
-            <!-- Translation controls -->
-            <Button x:Name="TranslateButton" Text="Translate Description" Clicked="OnTranslateButtonClicked" />
+                        <!-- Disease details -->
+                        <Label Text="DISEASE CONDITION" FontAttributes="Bold" />
+                        <Label Text="{Binding TrialTreatment.Trial.Disease.Condition}" />
 
-            <StackLayout x:Name="LanguageSelectionLayout" IsVisible="False">
-                <Picker x:Name="LanguagePicker" Title="Select Language">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Xhosa</x:String>
-                            <x:String>Zulu</x:String>
-                            <x:String>Afrikaans</x:String>
-                        </x:Array>
-                    </Picker.ItemsSource>
-                </Picker>
-                <Button Text="Translate" Clicked="OnTranslateConfirmButtonClicked" />
-            </StackLayout>
+                        <!-- Treatment details -->
+                        <Label Text="TREATMENT" FontAttributes="Bold" />
+                        <Label Text="{Binding TrialTreatment.Treatment.TreatmentName}" FontAttributes="Bold" />
+                        <Label Text="{Binding TrialTreatment.Treatment.TreatmentDescription}" />
+                    </StackLayout>
+                    <!--<Label x:Name="TrialDescriptionLabel"
+               Text="Trial description will appear here."
+               FontSize="Medium"
+               TextColor="Black"
+               Padding="10" />
 
-            <Label x:Name="TranslatedDescriptionLabel" Text="" FontAttributes="Italic" TextColor="Gray" />
-        </StackLayout>
-    </ScrollView>
+            <Button Text="Choose Language" Clicked="OnChooseLanguageClicked" />-->
+                </Grid>
+            </ScrollView>
+        </Frame>
+    </Grid>
 </ContentPage>

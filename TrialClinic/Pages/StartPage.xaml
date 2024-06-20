@@ -6,6 +6,17 @@
              BackgroundImageSource="bluebackground.png"
              Title="">
     <Grid>
+
+        <Image Source="clinical_bridge_logo.jpg" 
+            VerticalOptions="Start"
+            HorizontalOptions="End"
+            WidthRequest="50"
+            HeightRequest="50"
+            Margin="20">
+            
+        </Image>
+
+
         <Label Text="FIND CLINICAL TRIALS FOR YOUR CONDITION" 
                HorizontalOptions="Center"
                VerticalOptions="CenterAndExpand"
