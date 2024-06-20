@@ -82,5 +82,12 @@ namespace TrialClinic.Pages
             TranslateButton.IsVisible = true;
             LanguageSelectionLayout.IsVisible = false;
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            TrialTreatment = _database.GetTrialTreatmentById(Trial.TrialId);
+        }
     }
 }

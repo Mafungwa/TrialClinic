@@ -230,14 +230,15 @@ namespace TrialClinic.Services
         {
             var trialTreatment = _dbconnection.Table<TrialTreatment>().Where(x => x.TrialId == trialId).FirstOrDefault();
 
-         //   var trialTreatments = _dbconnection.Table<TrialTreatment>().ToList();
+            //   var trialTreatments = _dbconnection.Table<TrialTreatment>().ToList();
 
             if (trialTreatment != null)
+            {
                 _dbconnection.GetChildren<TrialTreatment>(trialTreatment, true);
 
-            if (trialTreatment.Trial != null)
-            _dbconnection.GetChildren <Trial>(trialTreatment.Trial, true);
-
+                if (trialTreatment.Trial != null)
+                    _dbconnection.GetChildren<Trial>(trialTreatment.Trial, true);
+            }
             return trialTreatment;
         }
 

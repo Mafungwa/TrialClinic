@@ -29,8 +29,7 @@
                         <Label Text="{Binding TrialTreatment.Trial.TrialEndDate}" />
 
                         <Label Text="DESCRIPTION" FontAttributes="Bold" />
-                        <Label Text="{Binding TrialTreatment.Trial.TrialDescription}" />
-
+                        <Label x:Name="DescriptionLabel" Text="{Binding TrialTreatment.Trial.TrialDescription}" />
                         <!-- Location details -->
                         <Label Text="LOCATION" FontAttributes="Bold" />
                         <Label Text="{Binding TrialTreatment.Trial.Location.StreetAddress}" />
@@ -46,6 +45,24 @@
                         <Label Text="TREATMENT" FontAttributes="Bold" />
                         <Label Text="{Binding TrialTreatment.Treatment.TreatmentName}" FontAttributes="Bold" />
                         <Label Text="{Binding TrialTreatment.Treatment.TreatmentDescription}" />
+
+                        <Button x:Name="TranslateButton" Text="Translate Description" Clicked="OnTranslateButtonClicked" />
+
+                        <StackLayout x:Name="LanguageSelectionLayout" IsVisible="False">
+                            <Picker x:Name="LanguagePicker" Title="Select Language">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Xhosa</x:String>
+                                        <x:String>Zulu</x:String>
+                                        <x:String>Afrikaans</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                            <Button Text="Translate" Clicked="OnTranslateConfirmButtonClicked" />
+                        </StackLayout>
+
+                        <Label x:Name="TranslatedDescriptionLabel" Text="" FontAttributes="Italic" TextColor="Gray" />
+
                     </StackLayout>
                     <!--<Label x:Name="TrialDescriptionLabel"
                Text="Trial description will appear here."
